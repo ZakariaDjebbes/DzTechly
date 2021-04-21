@@ -5,3 +5,4 @@ obj
 .vscode
 API/dztechly.db
 API/API.csproj.user
+node_modules
