@@ -1,0 +1,44 @@
+[
+    {
+        "UserName": "Zakaria",
+        "Email": "zakaria.djebbes@gmail.com",
+        "Address":
+        {
+            "FirstName": "Zakaria",
+            "LastName": "Djebbes",
+            "Street": "250 Logement",
+            "City": "El Khroub",
+            "Wilaya": "Constantine",
+            "ZipCode": "12345"
+        },
+        "EmailConfirmed": true
+    },
+    {
+        "UserName": "Nassim",
+        "Email": "Lacheheub.MohammedNassim@gmail.com",
+        "Address":
+        {
+            "FirstName": "Mohhamed Nassim",
+            "LastName": "Lacheheub",
+            "Street": "Constantine",
+            "City": "Ali Menjli",
+            "Wilaya": "Constantine",
+            "ZipCode": "12345"
+        },
+        "EmailConfirmed": false
+    },
+    {
+        "UserName": "Admin",
+        "Email": "orochi255@hotmail.fr",
+        "Address":
+        {
+            "FirstName": "Administrator",
+            "LastName": "Administratior",
+            "Street": "Administratior",
+            "City": "Administratior",
+            "Wilaya": "None",
+            "ZipCode": "000000"
+        },
+        "EmailConfirmed": true
+    }
+]

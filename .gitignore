@@ -1,0 +1,7 @@
+API/appsettings.json
+bin
+obj
+.vs
+.vscode
+API/dztechly.db
+API/API.csproj.user
