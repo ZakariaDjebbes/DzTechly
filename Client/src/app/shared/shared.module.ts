@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NgbNavModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule
+    NgbRatingModule,
+    NgbNavModule
+  ],
+  exports:[
+    NgbRatingModule,
+    NgbNavModule
   ]
 })
 export class SharedModule { }

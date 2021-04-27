@@ -1,0 +1,21 @@
+ul.category-list{
+    list-style: none;
+    & .category{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    & .type{
+        margin: 5px;
+        font-size: 14px;
+    }
+}
+
+.dropdown-menu::before, 
+.dropdown-menu::after {
+    border: none;
+    content: none;
+}
+
+.dropdown:hover{
+    cursor: pointer;
+}

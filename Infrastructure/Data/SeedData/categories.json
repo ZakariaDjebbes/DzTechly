@@ -1,0 +1,22 @@
+[
+    {
+        "Id": 1,
+        "Name":"Parts"
+    },
+    {
+        "Id":2,
+        "Name":"Peripheral"
+    },
+    {
+        "Id":3,
+        "Name":"Portable"
+    },
+    {
+        "Id":4,
+        "Name":"Network"
+    },
+    {
+        "Id":5,
+        "Name":"Tablet"
+    }
+]

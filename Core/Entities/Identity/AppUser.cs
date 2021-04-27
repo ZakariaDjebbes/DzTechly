@@ -6,6 +6,7 @@ namespace Core.Entities.Identity
     public class AppUser : IdentityUser
     {
         public Address Address { get; set; }
+        public PersonalInformation PersonalInformation { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
     }
 }

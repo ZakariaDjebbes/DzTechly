@@ -1,5 +1,9 @@
-using System.Linq;
+﻿using System.Linq;
 using API.Errors;
+using Core.Interfaces.Repositories;
+using Core.Interfaces.Services;
+using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +13,10 @@ namespace API.Extensions
 	{
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
 		{
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+			services.AddScoped<ITokenService, TokenService>();
+			services.AddScoped<IReviewService, ReviewService>();
 			services.Configure<ApiBehaviorOptions>(options =>
 			{
 				options.InvalidModelStateResponseFactory = actionContext =>

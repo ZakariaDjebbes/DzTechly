@@ -1,0 +1,152 @@
+[
+    {
+        "Id":1,
+        "ProductTypeId":7,
+        "Name":"Designation"
+    },
+    {
+        "Id":2,
+        "ProductTypeId":7,
+        "Name":"Brand"
+    },
+    {
+        "Id":3,
+        "ProductTypeId":7,
+        "Name":"Model"
+    },
+    {
+        "Id":4,
+        "ProductTypeId":7,
+        "Name":"Processor Model"
+    },
+    {
+        "Id":5,
+        "ProductTypeId":7,
+        "Name":"Processor Support"
+    },
+    {
+        "Id":6,
+        "ProductTypeId":7,
+        "Name":"CPU Frequency",
+        "Unit":"GHz"
+    },
+    {
+        "Id":7,
+        "ProductTypeId":7,
+        "Name":"CPU Frequency (Turbo)",
+        "Unit":"GHz"
+    },
+    {
+        "Id":8,
+        "ProductTypeId":7,
+        "Name":"Number of Cores"
+    },
+    {
+        "Id":9,
+        "ProductTypeId":7,
+        "Name":"Thread Number"
+    },
+    {
+        "Id":10,
+        "ProductTypeId":7,
+        "Name":"Platform"
+    },
+    {
+        "Id":11,
+        "ProductTypeId":7,
+        "Name":"Core Name"
+    },
+    {
+        "Id":12,
+        "ProductTypeId":7,
+        "Name":"Engraving fineness",
+        "Unit":"nm"
+    },
+    {
+        "Id":13,
+        "ProductTypeId":7,
+        "Name":"TDP",
+        "Unit":"W"
+    },
+    {
+        "Id":14,
+        "ProductTypeId":7,
+        "Name":"Cache L2",
+        "Unit":"Mo"
+    },
+    {
+        "Id":15,
+        "ProductTypeId":7,
+        "Name":"Cache L3",
+        "Unit":"Mo"
+    },
+    {
+        "Id":16,
+        "ProductTypeId":7,
+        "Name":"Graphics chipset"
+    },
+    {
+        "Id":17,
+        "ProductTypeId":7,
+        "Name":"Memory controller"
+    },
+    {
+        "Id":18,
+        "ProductTypeId":7,
+        "Name":"Memory Controller type"
+    },
+    {
+        "Id":19,
+        "ProductTypeId":7,
+        "Name":"Memory Frequency",
+        "Unit":"MHz"
+    },
+    {
+        "Id":20,
+        "ProductTypeId":7,
+        "Name":"Use type"
+    },
+    {
+        "Id":21,
+        "ProductTypeId":7,
+        "Name":"Gamer"
+    },
+    {
+        "Id":22,
+        "ProductTypeId":7,
+        "Name":"Box version"
+    },
+    {
+        "Id":23,
+        "ProductTypeId":7,
+        "Name":"Fan supplied"
+    },
+    {
+        "Id":24,
+        "ProductTypeId":7,
+        "Name":"Commercial guarantee"
+    },
+    {
+        "Id":25,
+        "ProductTypeId":7,
+        "Name":"Bus Frequency",
+        "Unit":"GT/s"
+    },
+    {
+        "Id":26,
+        "ProductTypeId":7,
+        "Name":"Virtualization"
+    },
+    {
+        "Id":27,
+        "ProductTypeId":7,
+        "Name":"Chipset Frequency",
+        "Unit":"MHz"
+    },
+    {
+        "Id":28,
+        "ProductTypeId":7,
+        "Name":"Chipset Frequency (Boosted)",
+        "Unit":"MHz"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "Id":1,
+        "Name":"General Informations"
+    },
+    {
+        "Id":2,
+        "Name":"Main Caracteristics"
+    },
+    {
+        "Id":3,
+        "Name":"Architecture"
+    },
+    {
+        "Id":4,
+        "Name":"Graphic Chipset"
+    },
+    {
+        "Id":5,
+        "Name":"Memory Controller"
+    },
+    {
+        "Id":6,
+        "Name":"Advanced Tech"
+    },
+    {
+        "Id":7,
+        "Name":"Conditionning"
+    },
+    {
+        "Id":8,
+        "Name":"Guarantees"
+    }
+]

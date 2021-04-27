@@ -4,40 +4,49 @@
         "Email": "zakaria.djebbes@gmail.com",
         "Address":
         {
-            "FirstName": "Zakaria",
-            "LastName": "Djebbes",
             "Street": "250 Logement",
             "City": "El Khroub",
             "Wilaya": "Constantine",
             "ZipCode": "12345"
         },
-        "EmailConfirmed": true
+        "PersonalInformation":
+        {
+            "FirstName": "Zakaria",
+            "LastName": "Djebbes"
+        },
+        "EmailConfirmed": false
     },
     {
         "UserName": "Nassim",
         "Email": "Lacheheub.MohammedNassim@gmail.com",
         "Address":
         {
-            "FirstName": "Mohhamed Nassim",
-            "LastName": "Lacheheub",
             "Street": "Constantine",
             "City": "Ali Menjli",
             "Wilaya": "Constantine",
             "ZipCode": "12345"
         },
-        "EmailConfirmed": false
+        "PersonalInformation":
+        {
+            "FirstName": "Mohhamed Nassim",
+            "LastName": "Lacheheub"
+        },
+        "EmailConfirmed": true
     },
     {
-        "UserName": "Admin",
-        "Email": "orochi255@hotmail.fr",
+        "UserName": "Maamri",
+        "Email": "MaamriAnim@hotmail.fr",
         "Address":
         {
-            "FirstName": "Administrator",
-            "LastName": "Administratior",
-            "Street": "Administratior",
-            "City": "Administratior",
-            "Wilaya": "None",
+            "Street": "Maamri",
+            "City": "Maamri",
+            "Wilaya": "Maamri",
             "ZipCode": "000000"
+        },
+        "PersonalInformation":
+        {
+            "FirstName": "Maamri",
+            "LastName": "Ramdan"
         },
         "EmailConfirmed": true
     }

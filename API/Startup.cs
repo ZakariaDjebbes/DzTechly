@@ -40,7 +40,7 @@ namespace API
 
             services.AddDbContext<StoreContext>(ctx =>
             {
-                ctx.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+                ctx.UseSqlite(_config.GetConnectionString("DefaultConnection"), o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             });
 
             services.AddIdentityService(_config);
@@ -55,6 +55,7 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();

@@ -1,0 +1,37 @@
+using System.Threading.Tasks;
+using Core.Entities.Product;
+using Core.Interfaces.Repositories;
+using Core.Interfaces.Services;
+
+namespace Infrastructure.Services
+{
+    public class ReviewService : IReviewService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ReviewService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<Review> CreateReviewAsync(string userId, int productId, string comment, int stars)
+        {
+            var review = new Review(userId, productId, comment, stars);
+			_unitOfWork.Repository<Review>().Add(review);
+
+            var results = await _unitOfWork.Complete();
+
+            if (results <= 0)
+            {
+                return null;
+            }        
+            
+            return review;
+        }
+
+        Task<Review> IReviewService.CreateReviewAsync(string userId, int productId, string comment, int stars)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}

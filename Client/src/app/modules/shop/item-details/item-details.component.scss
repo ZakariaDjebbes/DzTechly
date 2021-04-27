@@ -1,0 +1,23 @@
+.i-product-count {
+  color: rgb(196, 196, 196);
+  transition: 0.3s all;
+  font-size: 1.5rem;
+
+  &:hover {
+    color: #5e72e4;
+    cursor: pointer;
+  }
+}
+
+#product-count {
+  font-size: 1.25em;
+}
+
+.section-bot {
+  padding-top: 0 !important;
+}
+
+.sheet-category-name {
+  font-weight: bold;
+}
+  

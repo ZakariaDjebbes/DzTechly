@@ -1,0 +1,24 @@
+[
+    {
+        "Id":1,
+        "Name":"AMD EPYC 7451 (2.3 GHz)",
+        "Description":"The AMD EPYC 7451 processor is designed for intensive workloads and virtualization. It delivers high performance, long-term reliability and increased security to all customers who need it.",
+        "PictureUrl":"images/products/cpu_1.jpg",
+        "Price":20000,
+        "ProductTypeId":7,
+        "ProductCategoryId":1,
+        "TechnicalSheetId":1,
+        "Quantity":13
+    },
+    {
+        "Id":2,
+        "Name":"Intel Pentium Gold G6400 (4.0 GHz)",
+        "Description":"Affordable and efficient, the Comet Lake Intel Pentium G6400 (4.0 GHz) processor is an ideal, inexpensive and efficient solution for office automation and multimedia entertainment.",
+        "PictureUrl":"images/products/cpu_2.jpg",
+        "Price":1340,
+        "ProductTypeId":7,
+        "ProductCategoryId":1,
+        "TechnicalSheetId":2,
+        "Quantity":50
+    }
+]

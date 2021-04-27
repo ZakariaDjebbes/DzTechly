@@ -3,9 +3,9 @@
 		"Name": "Administrator"
 	},
 	{
-		"Name": "Merchant"
+		"Name": "Client"
 	},
 	{
-		"Name": "Client"
+		"Name":"Moderator"
 	}
 ]
