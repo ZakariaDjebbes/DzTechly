@@ -81,25 +81,44 @@
                 <li [ngbNavItem]="1">
                     <a ngbNavLink><i class="fa fa-question-circle"></i> Technical Sheet</a>
                     <ng-template ngbNavContent>
-                        <!-- <div class="row" *ngFor="let category of product">
+                        <div class="row mb-2 info-category" *ngFor="let info of categories">
                             <div class="col-12 col-md-4">
-                                <h5 class="text-primary sheet-category-name">{{category}}</h5>
+                                <h5 class="text-primary sheet-category-name">{{info[0]}}</h5>
                             </div>
                             <div class="col-12 col-md-8">
-                                <div class="pb-3 sheet-category-value">
-                                    <h6 class="text-black d-inline">Designation: </h6>
-                                    <p class="d-inline">Asus rogue nm 5653s</p>
+                                <div class="pb-3 sheet-category-value" *ngFor="let value of info[1]">
+                                    <h6 class="text-black d-inline">{{value.additionalInfoName}}: </h6>
+                                    <p class="d-inline">{{value.additionalInfoValue}}</p> <span class="text-info" *ngIf="value.unit !== null"> {{value.unit}}</span>
                                 </div>
-                                
                             </div>
                         </div>
-                        <hr> -->
                     </ng-template>
                 </li>
                 <li [ngbNavItem]="2">
                     <a ngbNavLink><i class="fa fa-star"></i> Customer opinions</a>
                     <ng-template ngbNavContent>
                         <h4>Write a review about this product</h4>
+                        <div class="row my-3">
+                            <div class="col-4"></div>
+                            <div class="col-4 card card-sm shadow-sm p-3">
+                                <ng-container *ngIf="product.reviewsAverage !== -1">
+                                    <div class="d-flex justify-content-center text-center">
+                                        <p class="text-primary">
+                                            <span class="average-review mr-1">{{product.reviewsAverage}}</span><span class="ml-1 max-review">/5</span>
+                                        </p>
+                                    </div>
+                                    <div class="d-flex justify-content-center text-center">
+                                        <p class="text-muted text-default">with a total of {{product.reviewsNumber}} reviews</p>
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngIf="product.reviewsAverage === -1">
+                                    <div class="d-fex justify-content-center text-center">
+                                        <p class="font-weight-bold text-warning">There is currently no review for this product.</p>
+                                    </div>
+                                </ng-container>
+                            </div>    
+                            <div class="col-4"></div>
+                        </div>
                         <div class="row mt-5">
                             <div class="col">
                                 <app-product-review [productId]="product.id"></app-product-review>

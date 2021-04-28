@@ -19,3 +19,16 @@ ul.category-list{
 .dropdown:hover{
     cursor: pointer;
 }
+
+.cart-count{
+    position: relative;
+    bottom: 20px;
+    left: 35px;
+    z-index: 3;
+    background-color: #FA6341;
+    color: white;
+}
+
+.ni.ni-cart{
+    font-size: 20px;
+}

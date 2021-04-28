@@ -23,11 +23,19 @@ export class ShopService {
     let params = new HttpParams();
 
     if (shopParams.categoryId !== 0) {
-      params = params.append('brandId', shopParams.categoryId.toString());
+      params = params.append('categoryId', shopParams.categoryId.toString());
     }
 
     if (shopParams.typeId !== 0) {
       params = params.append('typeId', shopParams.typeId.toString());
+    }
+
+    if(shopParams.minPrice !== 0){
+      params = params.append('minPrice', shopParams.minPrice.toString());
+    }
+
+    if(shopParams.maxPrice !== 0){
+      params = params.append('maxPrice', shopParams.maxPrice.toString());      
     }
 
     if (shopParams.search)

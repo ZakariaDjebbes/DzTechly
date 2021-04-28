@@ -12,19 +12,29 @@ import { ShopService } from './shop.service';
 })
 export class ShopComponent implements OnInit {
   @ViewChild('search', { static: false }) searchTerm: ElementRef;
+  @ViewChild('minPrice', { static: false }) minPrice: ElementRef;
+  @ViewChild('maxPrice', { static: false }) maxPrice: ElementRef;
+
   products: IProduct[];
   categories: IProductCategory[];
   types: IProductType[];
   totalCount: number;
+  pageSize = 15;
   shopParams = new ShopParams();
 
+  isSortSearchCollapsed = false;
+  isPricingCollapsed = true;
+  isCategoriesCollapsed = true;
+  isTypesCollapsed = true;
+
   sortOptions = [
-    {name: 'Alphabetical', value: 'name'},
-    {name: 'Price: Low to Heigh', value: 'priceAsc'},
-    {name: 'Price: Heigh to Low', value: 'priceDesc'}
+    { name: 'Alphabetical', value: 'name' },
+    { name: 'Price: Low to Heigh', value: 'priceAsc' },
+    { name: 'Price: Heigh to Low', value: 'priceDesc' }
   ];
 
-  
+  pageSizes = [ 6, 15, 25, 50];
+
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
@@ -36,7 +46,7 @@ export class ShopComponent implements OnInit {
   }
 
   private getProducts(): void {
-    this.shopParams.pageSize = 9;
+    this.shopParams.pageSize = this.pageSize;
     this.shopService.getProducts(this.shopParams).subscribe(response => {
       this.products = response.data;
       this.shopParams.pageNumber = response.pageIndex;
@@ -49,7 +59,7 @@ export class ShopComponent implements OnInit {
 
   private getCategories(): void {
     this.shopService.getCategories().subscribe(response => {
-      this.categories = [{id: 0, name: 'All'}, ...response];
+      this.categories = [{ id: 0, name: 'All' }, ...response];
     }, error => {
       console.error(error);
     });
@@ -57,13 +67,13 @@ export class ShopComponent implements OnInit {
 
   private getTypes(): void {
     this.shopService.getTypes().subscribe(response => {
-      this.types = [{id: 0, name: 'All', productCategory: 'All'}, ...response];
+      this.types = [{ id: 0, name: 'All', productCategory: 'All' }, ...response];
     }, error => {
       console.error(error);
     });
   }
 
-public OnCategorySelected(categoryId: number): void {
+  public OnCategorySelected(categoryId: number): void {
     this.shopParams.categoryId = categoryId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
@@ -77,26 +87,43 @@ public OnCategorySelected(categoryId: number): void {
 
   public OnSortSelected(sort: string): void {
     this.shopParams.sort = sort;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  public OnPageSize(pageSize: number): void {
+    console.log(pageSize);
+    this.pageSize = pageSize;
+    this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
   public OnPageChanged(event: any): void {
-    if (this.shopParams.pageNumber !== event)
-    {
+    if (this.shopParams.pageNumber !== event) {
       this.shopParams.pageNumber = event;
       this.getProducts();
     }
   }
 
-  public OnSearch(): void
-  {
+  public OnSearch(): void {
     this.shopParams.search = this.searchTerm.nativeElement.value;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
-  public onReset(): void
-  {
+  public OnMinPrice(): void {
+    this.shopParams.minPrice = this.minPrice.nativeElement.value;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  public OnMaxPrice(): void {
+    this.shopParams.maxPrice = this.maxPrice.nativeElement.value;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  public onReset(): void {
     this.searchTerm.nativeElement.value = '';
     this.shopParams = new ShopParams();
     this.getProducts();

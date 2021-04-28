@@ -18,12 +18,11 @@ namespace API.Helpers
 				.ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
 
 				CreateMap<TechnicalSheet, TechnicalSheetDto>()
-				.ForMember(d => d.ProductAddtionalInfos, o => o.MapFrom(s => s.ProductAddtionalInfos.OrderBy(x => x.AdditionalinfoCategoryId)));
+				.ForMember(d => d.ProductAddtionalInfos, o => o.MapFrom(s => s.ProductAddtionalInfos.OrderBy(x=>x.AdditionalinfoCategoryId).GroupBy(x => x.AdditionalInfoCategory.Name).ToDictionary(x => x.Key, x => x.OrderBy(x => x.AdditionalInfoName.Name).ToList())));
 
 				CreateMap<ProductAdditionalInfo, ProductAdditionalInfoDto>()
 				.ForMember(d => d.AdditionalInfoName, o=>o.MapFrom(s => s.AdditionalInfoName.Name))
-				.ForMember(d => d.Unit, o=>o.MapFrom(s => s.AdditionalInfoName.Unit))
-				.ForMember(d => d.AdditionalInfoCategory, o=>o.MapFrom(s => s.AdditionalInfoCategory.Name));
+				.ForMember(d => d.Unit, o=>o.MapFrom(s => s.AdditionalInfoName.Unit));
 
 				CreateMap<ProductType, ProductTypeDto>()
 				.ForMember(d => d.ProductCategory, o => o.MapFrom(s => s.ProductCategory.Name));

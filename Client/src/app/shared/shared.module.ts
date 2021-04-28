@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbNavModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbNavModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { PagerComponent } from './components/pager/pager.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [PagerComponent, TextInputComponent],
   imports: [
     CommonModule,
     NgbRatingModule,
-    NgbNavModule
+    NgbNavModule,
+    NgbPaginationModule,
+    NgbCollapseModule
   ],
   exports:[
     NgbRatingModule,
-    NgbNavModule
+    NgbNavModule,
+    NgbPaginationModule,
+    PagerComponent,
+    NgbCollapseModule,
+    TextInputComponent
   ]
 })
 export class SharedModule { }

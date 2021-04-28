@@ -1,0 +1,4 @@
+<ngb-pagination *ngIf="totalCount && totalCount > 0" [boundaryLinks]="true" [collectionSize]="this.totalCount" previousText="&lsaquo;"
+    nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [(page)]="page" (pageChange)="OnPageChanged(page)"
+    [pageSize]="pageSize">
+</ngb-pagination>

@@ -9,7 +9,9 @@ namespace Core.Specifications
 			: base(x => 
 			(string.IsNullOrEmpty(specParams.Search) || x.Name.ToLower().Contains(specParams.Search)) &&
 			(!specParams.CategoryId.HasValue || x.ProductCategoryId == specParams.CategoryId) &&
-			(!specParams.TypeId.HasValue || x.ProductTypeId == specParams.TypeId)
+			(!specParams.TypeId.HasValue || x.ProductTypeId == specParams.TypeId) &&
+			(!specParams.MinPrice.HasValue || x.Price >= specParams.MinPrice) &&
+			(!specParams.MaxPrice.HasValue || x.Price <= specParams.MaxPrice)
 		)
 		{
 			AddInclude(x => x.ProductCategory);

@@ -34,35 +34,94 @@
   <section class="section section-lg pt-lg-0 mt--200">
     <div class="p-3">
       <div class="row">
-        <div class="col-lg-3"></div>
+        <div class="col-lg-3 mb-4">
+          <div class="card p-4 shadow-sm">
+            <ng-container *ngIf="types && categories">
+              <!-- <div class="text-center mt-4 mb-3">
+                <img src="assets/images/logo/logo_transparent.png" id="logo" alt="logo" [routerLink]="['/']">
+              </div> -->
+              <div class="text-left">
+                <p class="filter-toggle text-default" (click)="isSortSearchCollapsed = !isSortSearchCollapsed"
+                  [attr.aria-expanded]="!isSortSearchCollapsed" aria-controls="collapseBasic">Sort and Search
+                  <i class="fa" [ngClass]="isSortSearchCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                </p>
+              </div>
+              <div [(ngbCollapse)]="isSortSearchCollapsed">
+                <label for="sort-select">Sort</label>
+                <select id="sort-select" class="custom-select mb-3" (change)="OnSortSelected($event.target.value)">
+                  <option *ngFor="let sort of sortOptions" [value]="sort.value">
+                    {{sort.name}}
+                  </option>
+                </select>
+                <div class="mb-3" *ngIf="products">
+                  <label for="search-input">Search</label>
+                  <input id="search-input" type="text" #search (keyup.enter)="OnSearch()" (blur)="OnSearch()"
+                    placeholder="Enter a product name" class="form-control">
+                </div>
+                <label for="sort-select">Page size</label>
+                <select id="sort-select" class="custom-select mb-3" (change)="OnSortSelected($event.target.value)">
+                  <option *ngFor="let size of pageSizes" [value]="size" [selected]="size == pageSize">
+                    {{size}}
+                  </option>
+                </select>
+              </div>
+              <div class="text-left mb-2">
+                <p class="filter-toggle text-default" (click)="isPricingCollapsed = !isPricingCollapsed"
+                  [attr.aria-expanded]="!isPricingCollapsed" aria-controls="collapseBasic">Filter by Price
+                  <i class="fa" [ngClass]="isPricingCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                </p>
+              </div>
+              <div [(ngbCollapse)]="isPricingCollapsed">
+                <label for="search-input">Minimum price</label>
+                <input id="search-input" type="number" #minPrice (keyup.enter)="OnMinPrice()" (blur)="OnMinPrice()"
+                  placeholder="Minimum price" class="form-control mb-3">
+                <label for="search-input">Maximum price</label>
+                <input id="search-input" type="number" #maxPrice (keyup.enter)="OnMaxPrice()" (blur)="OnMaxPrice()"
+                  placeholder="Minimum price" class="form-control mb-3">
+              </div>
+              <div class="text-left mb-2">
+                <p class="filter-toggle text-default" (click)="isCategoriesCollapsed = !isCategoriesCollapsed"
+                  [attr.aria-expanded]="!isCategoriesCollapsed" aria-controls="collapseBasic">Filter by Categories
+                  <i class="fa" [ngClass]="isCategoriesCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                </p>
+              </div>
+              <div [(ngbCollapse)]="isCategoriesCollapsed">
+                <ul class="list-group mb-3">
+                  <li class="list-group-item" *ngFor="let category of categories"
+                    [class.active]="category.id === this.shopParams.categoryId" [value]="category.id"
+                    (click)="OnCategorySelected(category.id)">
+                    {{category.name}}</li>
+                </ul>
+              </div>
+              <div class="text-left mb-2">
+                <p class="filter-toggle text-default" (click)="isTypesCollapsed = !isTypesCollapsed"
+                  [attr.aria-expanded]="!isTypesCollapsed" aria-controls="collapseBasic">Filter by Types
+                  <i class="fa" [ngClass]="isTypesCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                </p>
+              </div>
+              <div [(ngbCollapse)]="isTypesCollapsed">
+                <ul class="list-group my-3">
+                  <li class="list-group-item" *ngFor="let type of types"
+                    [class.active]="type.id === this.shopParams.typeId" [value]="type.id"
+                    (click)="OnTypeSelected(type.id)">
+                    {{type.name}}
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
+          </div>
+        </div>
         <div class="col-lg-9">
           <div class="row row-grid">
-            <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of products">
+            <div class="col-lg-4 col-md-6 col-10 offset-1 offset-md-0 mb-4" *ngFor="let item of products">
               <app-shop-item [product]='item'></app-shop-item>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-5">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                <i class="fa fa-angle-left"></i>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-            <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
-            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="javascript:void(0)">
-                <i class="fa fa-angle-right"></i>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <div class="mt-5 d-flex justify-content-center">
+        <app-pager [pageSize]="shopParams.pageSize" [totalCount]="totalCount" (pageChanged)="OnPageChanged($event)">
+        </app-pager>
       </div>
     </div>
   </section>

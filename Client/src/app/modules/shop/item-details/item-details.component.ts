@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from 'src/app/shared/models/IProduct';
+import { IProduct, IProductInfo } from 'src/app/shared/models/IProduct';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { ShopService } from '../shop.service';
 })
 export class ItemDetailsComponent implements OnInit {
   product: IProduct;
+  categories: Array<[string, IProductInfo]>;
   quantity = 1;
 
   constructor(private shopService: ShopService,
@@ -31,6 +32,8 @@ export class ItemDetailsComponent implements OnInit {
   loadPrudct(): void {
     this.shopService.getProduct(+this.activatedRoot.snapshot.paramMap.get('id')).subscribe(prodcut => {
       this.product = prodcut;
+      this.categories = Object.entries(prodcut.technicalSheet.productAddtionalInfos); 
+      console.log(this.categories)
     }, error => {
       console.error(error);
     });

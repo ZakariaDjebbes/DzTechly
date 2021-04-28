@@ -1,0 +1,42 @@
+.list-group .list-group-item {
+    cursor: pointer;
+    transition: 0.15s;
+
+    &:hover:not(.active) {
+        background-color: rgba($color: #5F72E5, $alpha: .2);
+        border-color: rgba($color: #5F72E5, $alpha: .2);
+        transition: 0.15s;
+    }
+    
+    &.active {
+        background-color: #5F72E5;
+        border-color: #5F72E5;
+    }
+}    
+
+.filter-toggle {
+    font-size: 20px;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-weight: 400;
+    user-select: none;
+
+    &:hover {
+        color: #5F72E5 !important;
+    }
+}
+
+// #logo {
+//     height: 56px;
+//     width: 86px;
+//     cursor: pointer;
+//     &:focus {
+//         outline: none;
+//     }
+
+//     &:hover {
+//         transform: scale(1.25);
+//     }
+
+//     transition: all 0.2s;
+// }
