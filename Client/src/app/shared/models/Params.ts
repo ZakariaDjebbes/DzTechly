@@ -7,6 +7,7 @@ export class ShopParams{
     search: string;
     minPrice = 0.0;
     maxPrice = 0.0;
+    inStock = false;
 }
 
 export class ReviewParams {

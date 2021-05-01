@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CartService } from 'src/app/modules/cart/cart.service';
+import { ICart } from 'src/app/shared/models/Cart';
 
 @Component({
     selector: 'app-navbar',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-    isCollapsed = false;
-    constructor() { }
+    isCollapsed: boolean;
+    cart$: Observable<ICart>;
+
+    constructor(private cartService: CartService ) { }
 
     ngOnInit(): void {
         this.isCollapsed = true;
-      }    
+        this.cart$ = this.cartService.cart$;
+    }
 }

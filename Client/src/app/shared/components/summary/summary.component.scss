@@ -1,0 +1,38 @@
+.table-title {
+    background-color: #212429;
+    color: rgb(231, 231, 231);
+
+    &:first-child{
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:last-child{
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+}
+ 
+.i-product-count {
+  color: #172b4d;
+  transition: 0.3s all;
+
+  &:hover {
+    color: #5e72e4;
+    cursor: pointer;
+  }
+}
+
+.trash-icon{
+  cursor: pointer;
+}
+
+.product-link {
+  color: #343a40;
+  text-decoration: none;
+  transition: 0.3s all;
+
+  &:hover {
+    color: #5e72e4;
+  }
+}

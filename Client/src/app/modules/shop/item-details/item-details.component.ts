@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct, IProductInfo } from 'src/app/shared/models/IProduct';
+import { CartService } from '../../cart/cart.service';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -13,12 +14,16 @@ export class ItemDetailsComponent implements OnInit {
   categories: Array<[string, IProductInfo]>;
   quantity = 1;
 
-  constructor(private shopService: ShopService,
-    private activatedRoot: ActivatedRoute) {
+  constructor(private shopService: ShopService, private activatedRoot: ActivatedRoute,
+    private cartService: CartService) {
   }
 
   ngOnInit(): void {
     this.loadPrudct();
+  }
+
+  addItemToCart(): void {
+    this.cartService.addItemToCart(this.product, this.quantity);
   }
 
   incrementQuantity(): void {
@@ -33,7 +38,6 @@ export class ItemDetailsComponent implements OnInit {
     this.shopService.getProduct(+this.activatedRoot.snapshot.paramMap.get('id')).subscribe(prodcut => {
       this.product = prodcut;
       this.categories = Object.entries(prodcut.technicalSheet.productAddtionalInfos); 
-      console.log(this.categories)
     }, error => {
       console.error(error);
     });

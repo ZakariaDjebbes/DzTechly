@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces.Repositories;
 using Core.Specifications;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Repositories
 {
 	public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 	{

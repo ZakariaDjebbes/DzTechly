@@ -2,7 +2,7 @@
 using API.Errors;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
-using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +17,7 @@ namespace API.Extensions
 			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IReviewService, ReviewService>();
+			services.AddScoped<ICartRepository, CartRepository>();
 			services.Configure<ApiBehaviorOptions>(options =>
 			{
 				options.InvalidModelStateResponseFactory = actionContext =>

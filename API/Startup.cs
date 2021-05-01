@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -42,6 +43,11 @@ namespace API
             {
                 ctx.UseSqlite(_config.GetConnectionString("DefaultConnection"), o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             });
+
+	        services.AddSingleton<IConnectionMultiplexer>(c => {
+				var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true);
+				return ConnectionMultiplexer.Connect(configuration);
+			});
 
             services.AddIdentityService(_config);
             services.AddSwaggerDocumentation();

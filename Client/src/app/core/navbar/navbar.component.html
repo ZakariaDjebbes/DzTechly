@@ -59,8 +59,8 @@
                 <a class="nav-link" href="#"><i class="ni ni-settings"></i> Configure your pc</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span class="badge badge-warning cart-count">4</span>
+                <a class="nav-link" href="#" [routerLink]="['/cart']">
+                    <span class="badge badge-warning cart-count" *ngIf="(cart$ | async) as cart">{{cart.items.length}}</span>
                     <i class="ni ni-cart"></i>
                 </a>
             </li>

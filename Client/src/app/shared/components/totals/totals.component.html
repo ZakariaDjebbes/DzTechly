@@ -1,0 +1,13 @@
+<div class="px-4 py-3 text-uppercase font-weight-bold title">Order summary </div>
+<div class="p-4">
+    <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+    <ul class="list-unstyled mb-4" *ngIf="(cartTotal$ | async) as cartTotal">
+        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal
+            </strong><strong>{{cartTotal.subtotal | currency:'DZD'}}</strong></li>
+        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and
+                handling</strong><strong>{{cartTotal.shipping | currency:'DZD'}}</strong></li>
+        <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+            <h5 class="font-weight-bold">{{cartTotal.total|currency:'DZD'}}</h5>
+        </li>
+    </ul>
+</div>

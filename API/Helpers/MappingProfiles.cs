@@ -1,6 +1,7 @@
 using System.Linq;
 using API.Dtos;
 using AutoMapper;
+using Core.Entities.Cart;
 using Core.Entities.Product;
 
 namespace API.Helpers
@@ -30,6 +31,9 @@ namespace API.Helpers
 				CreateMap<Review, ReviewToReturnDto>()
 				.ForMember(m => m.UserName, o => o.MapFrom(u => u.AppUser.UserName))
 				.ForMember(m => m.Email, o => o.MapFrom(u => u.AppUser.Email));
+
+				CreateMap<CustomerCartDto, CustomerCart>().ReverseMap();
+				CreateMap<CartItemDto, CartItem>();
 		}
 	}
 }

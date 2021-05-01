@@ -64,6 +64,10 @@
                     {{size}}
                   </option>
                 </select>
+                <div class="custom-control custom-checkbox mb-3">
+                  <input #inStock (change)="OnInStock()" class="custom-control-input"id="in-stock-check" type="checkbox">
+                  <label class="custom-control-label" for="in-stock-check"> <span>Products in stock only</span> </label>
+                </div>
               </div>
               <div class="text-left mb-2">
                 <p class="filter-toggle text-default" (click)="isPricingCollapsed = !isPricingCollapsed"

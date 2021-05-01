@@ -11,7 +11,8 @@ namespace Core.Specifications
 			(!specParams.CategoryId.HasValue || x.ProductCategoryId == specParams.CategoryId) &&
 			(!specParams.TypeId.HasValue || x.ProductTypeId == specParams.TypeId) &&
 			(!specParams.MinPrice.HasValue || x.Price >= specParams.MinPrice) &&
-			(!specParams.MaxPrice.HasValue || x.Price <= specParams.MaxPrice)
+			(!specParams.MaxPrice.HasValue || x.Price <= specParams.MaxPrice) &&
+			((specParams.InStock && x.Quantity > 0) || (!specParams.InStock && x.Quantity >= 0))
 		)
 		{
 			AddInclude(x => x.ProductCategory);

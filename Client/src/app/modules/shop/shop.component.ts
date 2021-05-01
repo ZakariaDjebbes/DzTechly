@@ -14,6 +14,7 @@ export class ShopComponent implements OnInit {
   @ViewChild('search', { static: false }) searchTerm: ElementRef;
   @ViewChild('minPrice', { static: false }) minPrice: ElementRef;
   @ViewChild('maxPrice', { static: false }) maxPrice: ElementRef;
+  @ViewChild('inStock', { static: false }) inStock: ElementRef;
 
   products: IProduct[];
   categories: IProductCategory[];
@@ -119,6 +120,12 @@ export class ShopComponent implements OnInit {
 
   public OnMaxPrice(): void {
     this.shopParams.maxPrice = this.maxPrice.nativeElement.value;
+    this.shopParams.pageNumber = 1;
+    this.getProducts();
+  }
+
+  public OnInStock(): void {
+    this.shopParams.inStock = this.inStock.nativeElement.checked;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }

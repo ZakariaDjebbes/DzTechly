@@ -1,6 +1,6 @@
-namespace Core.Entities
+namespace Core.Entities.Cart
 {
-    public class BasketItem
+    public class CartItem
     {
         public int Id { get; set; }
         public string ProductName { get; set; }
@@ -8,11 +8,7 @@ namespace Core.Entities
         public int Quantity { get; set; }
         public string PictureUrl { get; set; }
         public string Type { get; set; }
-        public int InStockQuantity { get; set; }
-
-        public bool IsInStock()
-        {
-            return InStockQuantity != 0;
-        }
+        public string Category { get; set; }
+        public bool IsInStock { get; set; }
     }
 }
