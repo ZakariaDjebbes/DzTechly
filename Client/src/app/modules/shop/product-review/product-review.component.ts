@@ -5,6 +5,7 @@ import { IReview } from 'src/app/shared/models/IReview';
 import { IReviewToCreate } from 'src/app/shared/models/IReviewToCreate';
 import { IUser } from 'src/app/shared/models/IUser';
 import { ReviewParams } from 'src/app/shared/models/Params';
+import { AccountService } from '../../account/account.service';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -27,11 +28,11 @@ export class ProductReviewComponent implements OnInit {
   loading = false;
   totalCount: number;
 
-  constructor(private shopService: ShopService/*, private accountService: AccountService*/) { }
+  constructor(private shopService: ShopService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.createReviewForm();
-    //this.user$ = this.accountService.currentUser$;
+    this.user$ = this.accountService.currentUser$;
     this.getReviews();
   }
 

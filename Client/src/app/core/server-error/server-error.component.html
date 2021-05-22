@@ -1,1 +1,47 @@
-<p>server-error works!</p>
+<main>
+    <div class="position-relative">
+        <!-- shape Hero -->
+        <section class="section section-lg section-shaped pb-250">
+            <div class="shape shape-style-1 bg-gradient-dark">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="container py-lg-md d-flex">
+                <h1 class="display-3  text-white">
+                    Error 500 - A Server side error occured
+                </h1>
+            </div>
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1">
+                    <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+        <!-- 1st Hero Variation -->
+    </div>
+    <section class="section section-lg pt-lg-0 mt--200">
+        <div class="container">
+            <div class="card shadow p-5 mb-5">
+                <div class="text-center">
+                    <h3 class="font-weight-bold">500 Internal server error - Refreshing this page will clear the exception details.</h3>
+                    <h5 class="text-danger">{{error.message}}</h5>
+                    <p class="font-weight-bold">Note: Angular isn't the cause of this error</p>
+                </div>
+                <div class="text-left">
+                    <h4 class="font-weight-bold">Stack trace: </h4>
+                    <code class="mt-3 bg-dark">
+                        {{error.details}}
+                    </code>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

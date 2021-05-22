@@ -9,12 +9,12 @@ namespace API.Extensions
 {
 	public static class UserManagerExtensions
 	{
-		public static async Task<AppUser> FindByClaimsWithAddressAsync(this UserManager<AppUser> userManager,
+		public static async Task<AppUser> FindByClaimsWithAddressAndInfoAsync(this UserManager<AppUser> userManager,
 			ClaimsPrincipal claimsPrincipal)
 		{
 			var id = claimsPrincipal?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-			return await userManager.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Id == id);
+			return await userManager.Users.Include(x => x.Address).Include(x => x.PersonalInformation).SingleOrDefaultAsync(x => x.Id == id);
 		}
 
 		public static async Task<AppUser> FindByClaimsAsync(this UserManager<AppUser> userManager,

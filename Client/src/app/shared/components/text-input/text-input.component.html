@@ -1,4 +1,5 @@
-<div class="form-label-group">
+<label for="{{label}}"><i *ngIf="hasIcon" class="{{iconClasses}}"></i> {{label}} <span *ngIf="isRequiredAterisc" class="text-danger">*</span></label>
+<div class="form-group" [ngClass]="(controlDir && controlDir.control && controlDir.control.touched && !controlDir.control.pending) ? !controlDir.control.valid ? 'has-danger' : 'has-success' : null">
     <input 
         [ngClass]="(controlDir && controlDir.control && controlDir.control.touched) ? !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null"
         [type]="type"
@@ -11,13 +12,11 @@
         placeholder="{{label}}"
     >
     <div *ngIf="controlDir && controlDir.control && controlDir.control.status === 'PENDING'" class="fa fa-spinner fa-spin loader"></div>
-    <label for="{{label}}">{{label}}</label>
     <div class="invalid-feedback" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
         <span *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
         <span *ngIf="controlDir.control.errors?.pattern">Invalid {{label}}</span>
         <span *ngIf="controlDir.control.errors?.mismatch">Passwords don't match</span>
     </div>
-
     <div class="invalid-feedback d-block" *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.dirty)">
         <span *ngIf="controlDir.control.errors?.emailExists">Email address is in use</span>
         <span *ngIf="controlDir.control.errors?.emailNotExists">This email address doesn't exist</span>

@@ -27,7 +27,7 @@
         <!-- 1st Hero Variation -->
     </div>
     <section class="section pt-lg-0 mt--200">
-        <div class="mx-3 mt-3">
+        <div class="container mt-3">
             <div class="card shadow p-5">
                 <div class="row" *ngIf="product">
                     <div class="col-md-5 col-12">
@@ -41,14 +41,14 @@
                                     <div>
                                         <span>
                                             <ngb-rating [max]="5" [(rate)]="product.reviewsAverage" [readonly]="true"
-                                                style="color: #212329;font-size: 25px;"></ngb-rating>
+                                                style="color: #5E72E4;font-size: 25px;"></ngb-rating>
                                         </span>
                                         <span class="text-muted" style="font-size: 14px;"> {{product.reviewsNumber}}
                                             reviews</span>
                                     </div>
                                 </h3>
                                 <div class="d-flex justify-content-start align-items-center">
-                                    <span class="badge badge-primary mr-2">{{product.price | currency:'DZD'}}</span>
+                                    <span class="badge badge-primary mr-2">{{product.price | currency}}</span>
                                     <span class="badge badge-danger mr-2">{{product.productCategory}}</span>
                                     <span class="badge badge-warning">{{product.productType}}</span>
                                 </div>
@@ -109,7 +109,7 @@
                 <li [ngbNavItem]="2">
                     <a ngbNavLink><i class="fa fa-star"></i> Customer opinions</a>
                     <ng-template ngbNavContent>
-                        <h4>Write a review about this product</h4>
+                        <!-- <h4>Write a review about this product</h4>
                         <div class="row my-3">
                             <div class="col-4"></div>
                             <div class="col-4 card card-sm shadow-sm p-3">
@@ -133,7 +133,7 @@
                                 </ng-container>
                             </div>
                             <div class="col-4"></div>
-                        </div>
+                        </div> -->
                         <div class="row mt-5">
                             <div class="col">
                                 <app-product-review [productId]="product.id"></app-product-review>

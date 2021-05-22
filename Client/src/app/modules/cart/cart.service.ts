@@ -94,25 +94,36 @@ export class CartService {
     this.shopService.getProduct(item.id).subscribe(
       (res) => {
         if (res.isInStock) {
-          const itemToAdd: ICartItem = this.mapProductToCartITem(item, quantity);
           const cart = this.getCurrentCartValue() ?? this.createCart();
-          cart.items = this.addOrUpdateItem(cart.items, itemToAdd, quantity);
-          this.setCart(cart);
-          this.toastr.info("Product added to your cart!");
+          const itemToAdd: ICartItem = this.mapProductToCartITem(item, quantity);
+          const currentItem = cart.items.find(x => x.id === itemToAdd.id)
+          if (quantity > res.quantity || (currentItem  && currentItem.quantity >= res.quantity))
+          this.toastr.error("This quantity is greater than the current stock of this product");
+          else {
+            cart.items = this.addOrUpdateItem(cart.items, itemToAdd, quantity);
+            this.setCart(cart);
+            this.toastr.info("Product added to your cart!");
+          }
         }
         else
           this.toastr.error("This product is no longer in stock.", "Not in stock!");
       }
-
     );
-
   }
 
   public incrementItemQuantity(item: ICartItem): void {
-    const cart = this.getCurrentCartValue();
-    const foundItem = cart.items.findIndex((x) => x.id === item.id);
-    cart.items[foundItem].quantity++;
-    this.setCart(cart);
+    this.shopService.getProduct(item.id).subscribe(
+      (res) => {
+        if (item.quantity >= res.quantity || !item.isInStock)
+          this.toastr.error("This quantity is greater than the current stock of this product");
+        else {
+          const cart = this.getCurrentCartValue();
+          const foundItem = cart.items.findIndex((x) => x.id === item.id);
+          cart.items[foundItem].quantity++;
+          this.setCart(cart);
+        }
+      }
+    );
   }
 
   public decrementItemQuantity(item: ICartItem): void {

@@ -18,7 +18,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <span>{{product.price | currency:'DZD'}}</span>
+          <span>{{product.price | currency}}</span>
         </div>
         <div class="col-12">
           <ngb-rating [max]="5" [(rate)]="product.reviewsAverage" [readonly]="true"

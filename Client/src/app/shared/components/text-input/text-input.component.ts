@@ -11,6 +11,9 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() type = 'text';
   @Input() label: string;
   @Input() isDisabled = false;
+  @Input() iconClasses: string;
+  @Input() hasIcon = false;
+  @Input() isRequiredAterisc = false;
 
   constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;

@@ -34,10 +34,10 @@ namespace API.Extensions
                     };
                 });
 
-            // services.AddAuthorization(opts => {
-            //     opts.AddPolicy("RequireAdministration", policy => policy.RequireRole("Administrator"));
-            //     opts.AddPolicy("RequireModeration", policy => policy.RequireRole("Moderator", "Administrator"));
-            // });
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("RequireAdministration", policy => policy.RequireRole("Administrator"));
+                opts.AddPolicy("RequireModeration", policy => policy.RequireRole("Moderator", "Administrator"));
+            });
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -45,7 +45,7 @@ namespace API.Extensions
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             return services;

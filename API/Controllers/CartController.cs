@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using API.Dtos;
-using API.Errors;
+using API.Dtos.Cart;
 using AutoMapper;
 using Core.Entities.Cart;
-using Core.Entities.Product;
 using Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 

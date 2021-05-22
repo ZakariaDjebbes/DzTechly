@@ -1,6 +1,6 @@
 using System;
 
-namespace API.Dtos
+namespace API.Dtos.Product
 {
     public class ReviewToReturnDto
     {

@@ -1,0 +1,6 @@
+<h5 class="text-{{color}}"><i class="fa fa-exclamation-circle"></i> You have made errors: </h5>
+<ul class="mx-5">
+  <li *ngFor="let error of errors">
+    <p class="text-{{color}}"><small>{{error}}</small></p>
+  </li>
+</ul>

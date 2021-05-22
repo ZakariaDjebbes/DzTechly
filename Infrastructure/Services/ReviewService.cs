@@ -28,10 +28,5 @@ namespace Infrastructure.Services
             
             return review;
         }
-
-        Task<Review> IReviewService.CreateReviewAsync(string userId, int productId, string comment, int stars)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

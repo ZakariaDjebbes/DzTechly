@@ -1,7 +1,10 @@
 using System.Linq;
-using API.Dtos;
+using API.Dtos.Cart;
+using API.Dtos.Identity;
+using API.Dtos.Product;
 using AutoMapper;
 using Core.Entities.Cart;
+using Core.Entities.Identity;
 using Core.Entities.Product;
 
 namespace API.Helpers
@@ -34,6 +37,9 @@ namespace API.Helpers
 
 				CreateMap<CustomerCartDto, CustomerCart>().ReverseMap();
 				CreateMap<CartItemDto, CartItem>();
+
+				CreateMap<Address, AddressDto>().ReverseMap();
+				CreateMap<PersonalInformation, PersonalInformationDto>().ReverseMap();
 		}
 	}
 }

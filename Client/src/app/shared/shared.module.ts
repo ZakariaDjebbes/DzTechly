@@ -6,24 +6,31 @@ import { TextInputComponent } from './components/text-input/text-input.component
 import { TotalsComponent } from './components/totals/totals.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormErrorsComponent } from './components/form-errors/form-errors.component';
 
 @NgModule({
-  declarations: [PagerComponent, TextInputComponent, TotalsComponent, SummaryComponent],
+  declarations: [PagerComponent, TextInputComponent, TotalsComponent, SummaryComponent, FormErrorsComponent],
   imports: [
     CommonModule,
     NgbRatingModule,
     NgbNavModule,
     NgbPaginationModule,
     NgbCollapseModule,
-    RouterModule
+    ReactiveFormsModule,
+    RouterModule,
+    FormsModule
   ],
   exports:[
     NgbRatingModule,
     NgbNavModule,
     NgbPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
     PagerComponent,
     NgbCollapseModule,
     TextInputComponent,
+    FormErrorsComponent,
     TotalsComponent,
     SummaryComponent
   ]

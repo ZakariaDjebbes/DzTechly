@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Core.Entities.Product;
 
-namespace API.Dtos
+namespace API.Dtos.Product
 {
     public class ProductToReturnDto
     {

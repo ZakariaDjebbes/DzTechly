@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using API.Controllers;
-using API.Dtos;
+using API.Dtos.Product;
 using API.Errors;
 using API.Extensions;
 using API.Helpers;
@@ -80,7 +80,7 @@ namespace Infrastructure.Controllers
         [Authorize]
         public async Task<ActionResult<ReviewToReturnDto>> CreateReview(ReviewDto reviewDto)
         {
-            var user = await _userManager.FindByClaimsWithAddressAsync(HttpContext.User);
+            var user = await _userManager.FindByClaimsWithAddressAndInfoAsync(HttpContext.User);
             var review = await _reviewService.CreateReviewAsync(user.Id, reviewDto.ProductId.Value, reviewDto.Comment, reviewDto.Stars.Value);
 
             if (review == null)

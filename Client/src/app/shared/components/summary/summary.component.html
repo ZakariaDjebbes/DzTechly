@@ -43,7 +43,7 @@
                         </div>
                     </th>
                     <td class="border-0 align-middle">
-                        <strong>{{item.price | currency:'DZD'}}</strong>
+                        <strong>{{item.price | currency}}</strong>
                     </td>
                     <td class="border-0 align-middle text-center">
                         <i *ngIf="isFunctionalityEnabled" (click)="decrementItem(item)"
@@ -55,7 +55,7 @@
                             class="fa fa-plus-circle i-product-count"></i>
                     </td>
                     <td class="border-0 align-middle">
-                        <strong>{{(item.price * item.quantity) | currency:'DZD'}}</strong></td>
+                        <strong>{{(item.price * item.quantity) | currency}}</strong></td>
                     <td *ngIf="isFunctionalityEnabled" class="border-0 align-middle text-center"><a class="text-danger"><i
                                 (click)="deleteItem(item)" class="trash-icon fa fa-trash fa-2x text-warning"></i></a></td>
                 </tr>

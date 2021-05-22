@@ -1,1 +1,42 @@
-<p>login works!</p>
+<main>
+  <section class="section section-shaped section-lg">
+    <div class="shape shape-style-1 bg-gradient-dark">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="container pt-lg-md py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+                <small>Please enter your credentials</small>
+              </div>
+              <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <app-text-input formControlName="email" [label]="'Email Address'" [type]="'email'" [hasIcon]="true" [iconClasses]="'fa fa-envelope'"></app-text-input>
+                <app-text-input formControlName="password" [label]="'Password'" [type]="'password'" [hasIcon]="true" [iconClasses]="'fa fa-lock'"></app-text-input>
+                <div class="form-group">
+                  <a class="text-primary form-link" routerLink="/account/requestResetPassword">Forgot your password?</a>
+                </div>
+                <div class="form-group">
+                  <a class="text-primary form-link" routerLink="/account/requestEmailConfirmation">Confirm your email address?</a>
+                </div>
+                <div class="form-group">
+                  <a class="text-primary form-link" routerLink="/account/register">Don't have an account? Sign up!</a>
+                </div>
+                <button [disabled]="loginForm.invalid || loading" class="btn btn-lg btn-primary btn-block mb-3"
+                  type="submit">Sign in <i *ngIf="loading" class="fa fa-spin fa-spinner"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

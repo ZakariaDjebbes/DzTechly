@@ -60,13 +60,40 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" [routerLink]="['/cart']">
-                    <span class="badge badge-warning cart-count" *ngIf="(cart$ | async) as cart">{{cart.items.length}}</span>
+                    <span class="badge badge-warning cart-count"
+                        *ngIf="(cart$ | async) as cart">{{cart.items.length}}</span>
                     <i class="ni ni-cart"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-sign-in"></i> Login</a>
-            </li>
+            <ng-container *ngIf="(user$ | async) === null">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="['/account/login']"><i class="fa fa-sign-in"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" [routerLink]="['/account/register']"><i class="fa fa-user-plus"></i> Register</a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="(user$ | async) as user">
+                <li class="nav-item dropdown" ngbDropdown>
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle role="button">
+                        <i class="fa fa-user">
+                        </i>
+                        Welcome {{user.userName}}!
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+                        <a ngbDropdownItem routerLink="/account/profile" class="dropdown-item d-flex align-items-center">
+                            <i class="fa fa-user fa-fw mr-3"></i>Your Account
+                        </a>
+                        <a ngbDropdownItem routerLink="/orders" class="dropdown-item d-flex align-items-center">
+                            <i class="fa fa-history fa-fw mr-3"></i>View Orders
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a ngbDropdownItem (click)="logout()" href="" class="dropdown-item d-flex align-items-center">
+                            <i class="fa fa-sign-out fa-fw mr-3"></i>Logout
+                        </a>
+                    </div>
+                </li>
+            </ng-container>
         </ul>
     </div>
 </nav>

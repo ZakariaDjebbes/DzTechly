@@ -1,1 +1,85 @@
-<p>register works!</p>
+<main>
+  <section class="section section-shaped section-lg">
+    <div class="shape shape-style-1 bg-gradient-dark">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="container pt-lg-md py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+                <small>Register with your credentials and your personal informations!</small>
+                <br>
+                <em><small><span class="text-danger">*</span> required fields</small></em>
+              </div>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <div class="text-center">
+                      <h6 class="text-primary font-weight-bold">Account Informations</h6>
+                    </div>
+                    <app-text-input [isRequiredAterisc]="true" [hasIcon]="true" [iconClasses]="'fa fa-user'"
+                      formControlName="userName" [label]="'Username'">
+                    </app-text-input>
+                    <app-text-input [isRequiredAterisc]="true" [hasIcon]="true" [iconClasses]="'fa fa-at'"
+                      formControlName="email" [label]="'Email Address'">
+                    </app-text-input>
+                    <app-text-input [isRequiredAterisc]="true" [hasIcon]="true" [iconClasses]="'fa fa-lock'"
+                      formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+                    <app-text-input [isRequiredAterisc]="true" [hasIcon]="true" [iconClasses]="'fa fa-lock'"
+                      formControlName="confirmPassword" [label]="'Confirm Password'" [type]="'password'">
+                    </app-text-input>
+                    <div class="form-group">
+                      <a class="text-primary form-link" routerLink="/account/login">Already have an accunt?</a>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-center">
+                      <h6 class="text-primary font-weight-bold">Personal Informations</h6>
+                    </div>
+                    <ng-container formGroupName="personalInformation">
+                      <app-text-input formControlName="firstName" [label]="'First Name'" [type]="">
+                      </app-text-input>
+                      <app-text-input formControlName="lastName" [label]="'Last Name'" [type]="">
+                      </app-text-input>
+                      <app-text-input formControlName="birthDate" [label]="'Birth Date'" [hasIcon]="true"
+                        [iconClasses]="'fa fa-calendar-day'" [type]="'date'">
+                      </app-text-input>
+                    </ng-container>
+                    <div class="text-center">
+                      <h6 class="text-primary font-weight-bold">Address</h6>
+                    </div>
+                    <ng-container formGroupName="address">
+                      <app-text-input formControlName="wilaya" [label]="'Your Wilaya'">
+                      </app-text-input>
+                      <app-text-input formControlName="city" [label]="'Your City'">
+                      </app-text-input>
+                      <app-text-input formControlName="street" [label]="'Your Street'">
+                      </app-text-input>
+                      <app-text-input formControlName="zipcode" [label]="'Your Zipcode'">
+                      </app-text-input>
+                    </ng-container>
+                  </div>
+                  <ng-container *ngIf="errors">
+                    <app-form-errors [errors]="errors"></app-form-errors>
+                  </ng-container>
+                </div>
+
+                <button [disabled]="!registerForm.valid || loading" class="btn btn-lg btn-primary btn-block mb-3"
+                  type="submit">Register <i *ngIf="loading" class="fa fa-spin fa-spinner"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

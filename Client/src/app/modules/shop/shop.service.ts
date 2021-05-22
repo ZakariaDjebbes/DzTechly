@@ -64,7 +64,6 @@ export class ShopService {
     return this.http.get<IProductType[]>(this.baseUrl + 'products/types');
   }
 
-  // tslint:disable-next-line: typedef
   public getProduct(id: number){
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
@@ -81,7 +80,6 @@ export class ShopService {
     );
   }
 
-  // tslint:disable-next-line: typedef
   public reviewProduct(review: IReviewToCreate){
     return this.http.post(this.baseUrl + 'products/review', review);
   }
