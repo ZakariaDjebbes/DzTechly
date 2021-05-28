@@ -5,7 +5,6 @@ using API.Controllers;
 using API.Dtos.Product;
 using API.Errors;
 using API.Extensions;
-using API.Helpers;
 using AutoMapper;
 using Core.Entities.Identity;
 using Core.Entities.Product;
@@ -81,7 +80,15 @@ namespace Infrastructure.Controllers
         public async Task<ActionResult<ReviewToReturnDto>> CreateReview(ReviewDto reviewDto)
         {
             var user = await _userManager.FindByClaimsWithAddressAndInfoAsync(HttpContext.User);
-            var review = await _reviewService.CreateReviewAsync(user.Id, reviewDto.ProductId.Value, reviewDto.Comment, reviewDto.Stars.Value);
+            var spec = new ProductWithBrandAndTypeSpecification(reviewDto.ProductId.Value);
+            var product = await _unitOfWork.Repository<Product>().GetEntityWithSpecAsync(spec);
+
+            if(product == null)
+            {
+                return BadRequest(new ApiResponse(400, "No such product exists"));
+            }
+
+            var review = await _reviewService.CreateOrUpdateReviewAsync(user.Id, product, reviewDto.Comment, reviewDto.Stars.Value);
 
             if (review == null)
             {

@@ -1,0 +1,8 @@
+.form {
+    margin: 0px !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before{
+    background-color: #5E72E4;
+    transition: 0.3s;
+}

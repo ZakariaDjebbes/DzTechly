@@ -8,6 +8,7 @@ using Core.Entities.Product;
 using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Core.Entities.Order;
 
 namespace Infrastructure.Data
 {
@@ -92,6 +93,19 @@ namespace Infrastructure.Data
                     {
                         context.Products.Add(item);
                     }
+                }
+
+                if (!context.DeliveryMethods.Any())
+                {
+                    var dmData = File.ReadAllText(DELIVERY_METHOD_PATH);
+                    var dms = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
+
+                    foreach (var dm in dms)
+                    {
+                        context.DeliveryMethods.Add(dm);
+                    }
+
+                    await context.SaveChangesAsync();
                 }
 
                 if (!userManager.Users.Any())

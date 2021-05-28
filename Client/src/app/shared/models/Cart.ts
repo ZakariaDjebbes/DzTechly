@@ -1,20 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export interface ICart {
-    id: string
-    items: ICartItem[]
-    deliveryMethodId?: number
+    id: string;
+    items: ICartItem[];
+    deliveryMethodId?: number;
+    clientSecret?: string;
+    paymentIntentId?: string;
 }
 
 export interface ICartItem {
-    id: number
-    productName: string
-    price: number
-    quantity: number
-    pictureUrl: string
-    category: string
-    type: string
-    isInStock: boolean
+    id: number;
+    productName: string;
+    price: number;
+    quantity: number;
+    pictureUrl: string;
+    category: string;
+    type: string;
+    isInStock: boolean;
 }
 
 export class Cart implements ICart {

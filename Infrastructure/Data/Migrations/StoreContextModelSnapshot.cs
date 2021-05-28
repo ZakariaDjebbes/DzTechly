@@ -219,6 +219,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<long>("OrderDate")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -595,12 +598,6 @@ namespace Infrastructure.Data.Migrations
                             b1.Property<string>("City")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("FirstName")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("LastName")
-                                .HasColumnType("TEXT");
-
                             b1.Property<string>("Street")
                                 .HasColumnType("TEXT");
 
@@ -618,7 +615,31 @@ namespace Infrastructure.Data.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
+                    b.OwnsOne("Core.Entities.Order.PersonalInformation", "PersonalInformation", b1 =>
+                        {
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("BirthDate")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("FirstName")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("LastName")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
                     b.Navigation("DeliveryMethod");
+
+                    b.Navigation("PersonalInformation");
 
                     b.Navigation("ShipToAddress");
                 });

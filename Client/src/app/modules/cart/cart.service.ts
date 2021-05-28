@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Cart, ICart, ICartItem, ICartTotals } from 'src/app/shared/models/Cart';
+import { IDeliveryMethod } from 'src/app/shared/models/IDeliveryMethod';
 import { IProduct } from 'src/app/shared/models/IProduct';
 import { environment } from 'src/environments/environment';
 import { ShopService } from '../shop/shop.service';
@@ -22,13 +23,21 @@ export class CartService {
 
   constructor(private http: HttpClient, private shopService: ShopService, private toastr: ToastrService) { }
 
-  // public setShippingPrice(deliveryMethod: IDeliveryMethod): void {
-  //   this.shipping = deliveryMethod.price;
-  //   const basket = this.getCurrentBasketValue();
-  //   basket.deliveryMethodId = deliveryMethod.id;
-  //   this.calculateTotals();
-  //   this.setBasket(basket);
-  // }
+  public setShippingPrice(deliveryMethod: IDeliveryMethod): void {
+    this.shipping = deliveryMethod.price;
+    const cart = this.getCurrentCartValue();
+    cart.deliveryMethodId = deliveryMethod.id;
+    this.calculateTotals();
+    this.setCart(cart);
+  }
+
+  public createPaymentIntent() {
+    return this.http.post(this.baseUrl + 'payment/' + this.getCurrentCartValue().id, {}).pipe(
+      map((cart: ICart) => {
+        this.cartSource.next(cart);
+      })
+    );
+  }
 
   public getCart(id: string) {
     return this.http.get(this.baseUrl + 'cart?id=' + id).pipe(
@@ -37,24 +46,22 @@ export class CartService {
           this.cartSource.next(cart);
         else
           this.deleteCart(cart);
-        // if (cart.deliveryMethodId !== null)
-        // {
-        //   this.getDeliveryMethod(cart.deliveryMethodId).subscribe(
-        //     (res) => {
-        //       this.shipping = res.price;
-        //     },
-        //     (err) => {
-        //       console.error(err);
-        //     },
-        //     () => {
-        //       this.calculateTotals();
-        //     }
-        //   );
-        // }
-        // else
-        // {
-        this.calculateTotals();
-        //}
+        if (cart.deliveryMethodId !== null) {
+          this.getDeliveryMethod(cart.deliveryMethodId).subscribe(
+            (res) => {
+              this.shipping = res.price;
+            },
+            (err) => {
+              console.error(err);
+            },
+            () => {
+              this.calculateTotals();
+            }
+          );
+        }
+        else {
+          this.calculateTotals();
+        }
       })
     );
   }
@@ -97,8 +104,9 @@ export class CartService {
           const cart = this.getCurrentCartValue() ?? this.createCart();
           const itemToAdd: ICartItem = this.mapProductToCartITem(item, quantity);
           const currentItem = cart.items.find(x => x.id === itemToAdd.id)
-          if (quantity > res.quantity || (currentItem  && currentItem.quantity >= res.quantity))
-          this.toastr.error("This quantity is greater than the current stock of this product");
+          if (quantity > res.quantity || (currentItem && currentItem.quantity >= res.quantity)) {
+            this.toastr.error("This quantity is greater than the current stock of this product");
+          }
           else {
             cart.items = this.addOrUpdateItem(cart.items, itemToAdd, quantity);
             this.setCart(cart);
@@ -161,9 +169,9 @@ export class CartService {
     return cart;
   }
 
-  // private getDeliveryMethod(id: number) {
-  //   return this.http.get<IDeliveryMethod>(this.baseUrl + 'order/deliveryMethod/' + id);
-  // }
+  private getDeliveryMethod(id: number) {
+    return this.http.get<IDeliveryMethod>(this.baseUrl + 'order/deliveryMethod/' + id);
+  }
 
   private mapProductToCartITem(item: IProduct, quantity: number): ICartItem {
     return {

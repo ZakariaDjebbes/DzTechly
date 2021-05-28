@@ -5,6 +5,6 @@ namespace Core.Interfaces.Services
 {
     public interface IReviewService
     {
-        Task<Review> CreateReviewAsync(string userId, int productId, string comment, int stars);
+        Task<Review> CreateOrUpdateReviewAsync(string userId, Product product, string comment, int stars);
     }
 }

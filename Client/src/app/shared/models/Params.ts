@@ -14,3 +14,9 @@ export class ReviewParams {
     pageNumber = 1;
     pageSize = 5;
 }
+
+export class OrderParams {
+    pageNumber = 1;
+    pageSize = 5;
+    sort = 'dateDesc';
+}

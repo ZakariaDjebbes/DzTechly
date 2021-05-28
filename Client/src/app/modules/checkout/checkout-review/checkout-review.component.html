@@ -1,0 +1,13 @@
+<h4 class="font-weight-bold border-bottom my-4">Products </h4>
+<div class="container my-2">
+    <app-summary [isFunctionalityEnabled]="false"></app-summary>
+</div>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-2 mt-5">
+    <button class="btn btn-outline-danger mb-3 mb-lg-0" (click)="backToDeliery()">
+        <i class="fa fa-angle-left"></i> Back to Delivery
+    </button>
+    <button class="btn btn-primary" [disabled]="loading" (click)="createPaymentIntent()">
+        Go to Payment <i class="fa fa-angle-right"> <i *ngIf="loading" class="fa fa-spin fa-spinner"></i></i>
+    </button>
+</div>

@@ -9,35 +9,38 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Extensions
 {
-	public static class ApplicationServicesExtensions
-	{
-		public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-		{
-			services.AddSingleton<IEmailSenderService, EmailSenderService>();
-			services.AddScoped<IUnitOfWork, UnitOfWork>();
-			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-			services.AddScoped<ITokenService, TokenService>();
-			services.AddScoped<IReviewService, ReviewService>();
-			services.AddScoped<ICartRepository, CartRepository>();
-			services.Configure<ApiBehaviorOptions>(options =>
-			{
-				options.InvalidModelStateResponseFactory = actionContext =>
-				{
-					var errors = actionContext.ModelState
-					.Where(e => e.Value.Errors.Count > 0)
-					.SelectMany(x => x.Value.Errors)
-					.Select(x => x.ErrorMessage);
+    public static class ApplicationServicesExtensions
+    {
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IEmailSenderService, EmailSenderService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
-					var errorResponse = new ApiValidationErrorResponse()
-					{
-						Errors = errors
-					};
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    var errors = actionContext.ModelState
+                    .Where(e => e.Value.Errors.Count > 0)
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x => x.ErrorMessage);
 
-					return new BadRequestObjectResult(errorResponse);
-				};
-			});
+                    var errorResponse = new ApiValidationErrorResponse()
+                    {
+                        Errors = errors
+                    };
 
-			return services;
-		}
-	}
+                    return new BadRequestObjectResult(errorResponse);
+                };
+            });
+
+            return services;
+        }
+    }
 }

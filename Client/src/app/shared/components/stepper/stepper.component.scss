@@ -1,0 +1,13 @@
+button.nav-link{
+    border: none;
+    border-radius: 0px;
+    background-color: #f4f5f7;
+
+    &.active {
+        background-color: #5e72e4 !important;
+    }
+    &:not(.active) {
+        color: #212529;
+    }
+    transition: all 0.3s;
+}

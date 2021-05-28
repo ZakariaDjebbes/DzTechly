@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col" *ngIf="user$ | async">
-        <h5>Give us your thoughs: </h5>
+        <h5>
+            <ng-container *ngIf="currentReview !== null">Update your review:</ng-container>
+            <ng-container *ngIf="currentReview === null">Give us your thoughs: </ng-container>
+        </h5>
         <ng-container *ngIf="errors">
             <app-form-errors [errors]="errors"></app-form-errors>
         </ng-container>
@@ -18,13 +21,17 @@
                 <small>Remaining characters: {{remainingCommentLength}}</small>
             </div>
             <button [disabled]="reviewForm.invalid || loading" (submit)="onSubmit()" class="btn btn-primary float-right"
-                type="submit">Submit
-                review <i *ngIf="loading" class="fa fa-spin fa-spinner"></i></button>
+                type="submit">
+                <ng-container *ngIf="currentReview !== null">Update review</ng-container>
+                <ng-container *ngIf="currentReview === null">Submit review</ng-container>
+                <i *ngIf="loading" class="fa fa-spin fa-spinner"></i>
+            </button>
         </form>
     </div>
     <div class="col" *ngIf="(user$ | async) === null">
         <div class="alert alert-warning">
-            <i class="fa fa-warning"></i> You must be <a [routerLink]="['/account/login']" class="alert-link">Logged in</a> to review a product
+            <i class="fa fa-warning"></i> You must be <a [routerLink]="['/account/login']" class="alert-link">Logged
+                in</a> to review a product
         </div>
     </div>
 </div>
@@ -33,13 +40,15 @@
         <h3>What others think of this product</h3>
         <ng-container *ngFor="let review of reviews">
             <div class="my-3">
-                <h5>{{review.userName}} <small class="float-right review-date">{{review.reviewDate|date:'short'}}</small></h5>
-                <ngb-rating [rate]="review.stars" [max]="max"  [disabled]="true" [readonly]="true" style="color: #5E72E4;font-size: 15px;"></ngb-rating>
+                <h5>{{review.userName}} <small
+                        class="float-right review-date">{{review.reviewDate|date:'short'}}</small></h5>
+                <ngb-rating [rate]="review.stars" [max]="max" [readonly]="true" style="color: #5E72E4;font-size: 15px;">
+                </ngb-rating>
                 <p>{{review.comment}}</p>
             </div>
-            <hr>    
+            <hr>
         </ng-container>
-    
+
         <div class="d-flex justify-content-center">
             <app-pager (pageChanged)="OnPageChanged($event)" [pageSize]="5" [totalCount]="totalCount"></app-pager>
         </div>

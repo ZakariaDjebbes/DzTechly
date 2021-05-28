@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IReview } from 'src/app/shared/models/IReview';
 import { IReviewToCreate } from 'src/app/shared/models/IReviewToCreate';
 import { IUser } from 'src/app/shared/models/IUser';
@@ -18,6 +19,7 @@ export class ProductReviewComponent implements OnInit {
   @Input() productId: number = null;
 
   reviewForm: FormGroup;
+  currentReview : IReview;
   max = 5;
   rate = 0;
   remainingCommentLength = this.maxCommentLength;
@@ -43,8 +45,7 @@ export class ProductReviewComponent implements OnInit {
     });
   }
 
-  getRemainingCommentLength(): void
-  {
+  getRemainingCommentLength(): void {
     const currentLength = this.reviewForm.get('comment').value.length;
     this.remainingCommentLength = this.maxCommentLength - currentLength;
   }
@@ -60,8 +61,7 @@ export class ProductReviewComponent implements OnInit {
     };
     this.shopService.reviewProduct(reviewToCreate).subscribe(
       (res: IReview) => {
-        if (res)
-        {
+        if (res) {
           this.getReviews();
           this.reviewForm.reset();
         }
@@ -81,8 +81,7 @@ export class ProductReviewComponent implements OnInit {
     this.reviewParams.pageSize = 5;
     this.shopService.getReviewsOfProduct(this.productId, this.reviewParams).subscribe(
       (res) => {
-        if (res)
-        {
+        if (res) {
           this.reviews = res.data;
           this.reviewParams.pageNumber = res.pageIndex;
           this.reviewParams.pageSize = res.pageSize;
@@ -91,13 +90,17 @@ export class ProductReviewComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+      },
+      () => {
+        this.user$.subscribe(u => {
+          this.currentReview = this.reviews.find(x => x.userName === u.userName);
+        });
       }
     );
   }
 
   public OnPageChanged(event: any): void {
-    if (this.reviewParams.pageNumber !== event)
-    {
+    if (this.reviewParams.pageNumber !== event) {
       this.reviewParams.pageNumber = event;
       this.getReviews();
     }

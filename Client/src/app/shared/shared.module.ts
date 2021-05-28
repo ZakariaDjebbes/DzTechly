@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 import { NgbCollapseModule, NgbNavModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { PagerComponent } from './components/pager/pager.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
@@ -8,9 +9,12 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormErrorsComponent } from './components/form-errors/form-errors.component';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
+import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
 
 @NgModule({
-  declarations: [PagerComponent, TextInputComponent, TotalsComponent, SummaryComponent, FormErrorsComponent],
+  declarations: [PagerComponent, TextInputComponent, TotalsComponent, SummaryComponent, FormErrorsComponent, StepperComponent, PagingHeaderComponent, StatusBadgeComponent],
   imports: [
     CommonModule,
     NgbRatingModule,
@@ -19,20 +23,25 @@ import { FormErrorsComponent } from './components/form-errors/form-errors.compon
     NgbCollapseModule,
     ReactiveFormsModule,
     RouterModule,
+    CdkStepperModule,
     FormsModule
   ],
-  exports:[
+  exports: [
     NgbRatingModule,
     NgbNavModule,
     NgbPaginationModule,
     FormsModule,
+    CdkStepperModule,
     ReactiveFormsModule,
     PagerComponent,
     NgbCollapseModule,
+    StatusBadgeComponent,
     TextInputComponent,
     FormErrorsComponent,
     TotalsComponent,
-    SummaryComponent
+    SummaryComponent,
+    StepperComponent,
+    PagingHeaderComponent
   ]
 })
 export class SharedModule { }

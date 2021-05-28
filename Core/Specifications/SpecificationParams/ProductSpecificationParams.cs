@@ -3,7 +3,6 @@
 	public class ProductSpecificationParams
 	{
 		private const int MAX_PAGE_SIZE = 50;
-
 		public int PageIndex { get; set; } = 1;
 		public int? CategoryId { get; set; }
 		public int? TypeId { get; set; }

@@ -153,10 +153,28 @@ namespace API.Controllers
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
-                return BadRequest(new ApiResponse(400, "Problem updating the user"));
+                return BadRequest(new ApiResponse(400, "Problem updating the user address"));
             else
                 return Ok(address);
         }
+
+        [HttpPut("info")]
+        [Authorize]
+        public async Task<ActionResult<AddressDto>> UpdateInfo(PersonalInformationDto personalInformationDto)
+        {
+            var user = await _userManager.FindByClaimsWithAddressAndInfoAsync(HttpContext.User);
+            var info = _mapper.Map<PersonalInformationDto, PersonalInformation>(personalInformationDto);
+            user.PersonalInformation.BirthDate = info.BirthDate;
+            user.PersonalInformation.FirstName = info.FirstName;
+            user.PersonalInformation.LastName = info.LastName;
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                return BadRequest(new ApiResponse(400, "Problem updating the user informations"));
+            else
+                return Ok(personalInformationDto);
+        }
+
 
         [HttpPut("updatePassword")]
         [Authorize]

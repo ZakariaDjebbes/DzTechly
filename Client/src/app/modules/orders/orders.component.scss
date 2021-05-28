@@ -1,0 +1,21 @@
+.table-hover tbody tr {
+    &:hover {
+        cursor: pointer;
+    }
+
+    transition: all 0.2s;
+}
+
+.custom-table {
+    min-height: 430px;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 150px;
+    line-height: 160px;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    vertical-align: bottom;
+}

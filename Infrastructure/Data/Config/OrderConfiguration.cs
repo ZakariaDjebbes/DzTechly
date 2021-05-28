@@ -9,6 +9,10 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
+            builder.OwnsOne(o => o.PersonalInformation, a => {
+                a.WithOwner();
+            });
+
             builder.OwnsOne(o => o.ShipToAddress, a => {
                 a.WithOwner();
             });

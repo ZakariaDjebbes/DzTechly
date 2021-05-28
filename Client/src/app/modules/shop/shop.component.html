@@ -59,7 +59,7 @@
                     placeholder="Enter a product name" class="form-control">
                 </div>
                 <label for="sort-select">Page size</label>
-                <select id="sort-select" class="custom-select mb-3" (change)="OnSortSelected($event.target.value)">
+                <select id="sort-select" class="custom-select mb-3" (change)="OnPageSize($event.target.value)">
                   <option *ngFor="let size of pageSizes" [value]="size" [selected]="size == pageSize">
                     {{size}}
                   </option>

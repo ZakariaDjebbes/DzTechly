@@ -1,0 +1,28 @@
+<main>
+    <section class="section section-shaped section-lg">
+        <div class="shape shape-style-1 bg-gradient-dark">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container pt-lg-md py-5">
+            <div class="card shadow p-5 text-center">
+                <div><i class="fa fa-check-circle text-success icon"></i></div>
+                <h2>Thank you. Your order is confirmed</h2>
+                <p class="mb-4">Your order has not shipped yet, but this is to be expected as we are not a real store!
+                </p>
+                <ng-container *ngIf="order">
+                    <button routerLink="/orders/{{order.id}}" class="btn btn-success">View your order</button>
+                </ng-container>
+                <ng-container *ngIf="!order">
+                    <button routerLink="/orders" class="btn btn-outline-success">View your orders</button>
+                </ng-container>
+            </div>
+        </div>
+    </section>
+</main>

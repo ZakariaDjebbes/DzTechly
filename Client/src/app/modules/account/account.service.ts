@@ -7,6 +7,7 @@ import { IUser } from 'src/app/shared/models/IUser';
 import { environment } from 'src/environments/environment';
 import jwtDecode from 'jwt-decode';
 import { IAddress } from 'src/app/shared/models/IAddress';
+import { IPersonalInformation } from 'src/app/shared/models/IPersonalInformation';
 
 @Injectable({
   providedIn: 'root'
@@ -136,9 +137,17 @@ export class AccountService {
     return this.http.get<IAddress>(this.baseUrl + 'account/address');
   }
 
+  public getUserInfos() {
+    return this.http.get<IPersonalInformation>(this.baseUrl + 'account/info');
+  }
+
   // tslint:disable-next-line: typedef
   public updateUserAddress(address: IAddress) {
     return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
+  }
+
+  public updateUserInformations(personalInfo: IPersonalInformation) {
+    return this.http.put<IPersonalInformation>(this.baseUrl + 'account/info', personalInfo);
   }
 
   // tslint:disable-next-line: typedef

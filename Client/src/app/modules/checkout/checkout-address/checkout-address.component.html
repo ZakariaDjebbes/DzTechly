@@ -1,0 +1,59 @@
+<div class="mt-4" [formGroup]="checkoutForm">
+    <small>Required fields <span class="text-danger">*</span></small>
+    <div class="d-flex justify-content-between mb-4">
+        <h5 class="text-default font-weight-bold">Personal informations</h5>
+        <button (click)="saveUserInformations()" [disabled]="!checkoutForm.get('personalInformationForm').valid || 
+                !checkoutForm.get('personalInformationForm').dirty || personalInfoLoading" class="btn btn-success mb-3">
+            Save informations <i *ngIf="personalInfoLoading" class="fa fa-spin fa-spinner"></i>
+        </button>
+    </div>
+    <div class="row" formGroupName="personalInformationForm">
+        <div class="col-12 col-md-6">
+            <app-text-input formControlName="firstName" [label]="'First Name'" [isRequiredAterisc]="true">
+            </app-text-input>
+        </div>
+        <div class="col-12 col-md-6">
+            <app-text-input formControlName="lastName" [label]="'Last Name'" [isRequiredAterisc]="true">
+            </app-text-input>
+        </div>
+        <div class="offset-md-3 col-12 col-md-6">
+            <app-text-input formControlName="birthDate" [label]="'Birth Date'" [hasIcon]="true"
+                [iconClasses]="'fa fa-calendar-day'" [type]="'date'">
+            </app-text-input>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between my-4">
+        <h5 class="text-default font-weight-bold">Address </h5>
+        <button (click)="saveUserAddress()" [disabled]="!checkoutForm.get('addressForm').valid || 
+                !checkoutForm.get('addressForm').dirty || addressLoading" class="btn btn-success mb-3">
+            Save address <i *ngIf="addressLoading" class="fa fa-spin fa-spinner"></i>
+        </button>
+    </div>
+    <div class="row" formGroupName="addressForm">
+        <div class="col-12 col-md-6">
+            <app-text-input formControlName="wilaya" [label]="'Your Wilaya'" [isRequiredAterisc]="true">
+            </app-text-input>
+        </div>
+        <div class="col-12 col-md-6">
+            <app-text-input formControlName="city" [label]="'Your City'" [isRequiredAterisc]="true">
+            </app-text-input>
+        </div>
+        <div class="col-12 col-md-6">
+            <app-text-input formControlName="street" [label]="'Your Street'" [isRequiredAterisc]="true">
+            </app-text-input>
+        </div>
+        <div class="col-12 col-md-6">
+            <app-text-input formControlName="zipcode" [label]="'Your Zipcode'" [isRequiredAterisc]="true">
+            </app-text-input>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 float-none d-flex justify-content-between flex-column flex-lg-row mb-2">
+    <button class="btn btn-outline-danger mb-3 mb-lg-0" routerLink="/basket">
+        <i class="fa fa-angle-left"></i> Back to Basket
+    </button>
+    <button [disabled]="checkoutForm.get('addressForm').invalid || addressLoading || personalInfoLoading" class="btn btn-primary" cdkStepperNext>
+        Go to Delivery <i class="fa fa-angle-right"></i>
+    </button>
+</div>

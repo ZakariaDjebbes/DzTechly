@@ -93,7 +93,6 @@ export class ShopComponent implements OnInit {
   }
 
   public OnPageSize(pageSize: number): void {
-    console.log(pageSize);
     this.pageSize = pageSize;
     this.shopParams.pageNumber = 1;
     this.getProducts();
