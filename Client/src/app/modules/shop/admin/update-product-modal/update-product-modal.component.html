@@ -1,0 +1,107 @@
+<form role="form" [formGroup]="updateProductForm" (ngSubmit)="onSubmit()">
+    <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-pencil"></i> Update a product</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ng-container *ngIf="errors">
+            <app-form-errors [errors]="errors"></app-form-errors>
+        </ng-container>
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="form-group text-center">
+                    <h6 class="text-primary">General Informations</h6>
+                </div>
+                <app-text-input (updated)="onImageChanged($event)" formControlName="picture" [isRequiredAterisc]="true"
+                    [label]="'Picture'" [type]="'file'" [hasIcon]="false"></app-text-input>
+                <div class="form-group">
+                    <img [src]="url" class="img-thumbnail img-fluid rounded">
+                </div>
+                <app-text-input formControlName="name" [isRequiredAterisc]="true" [label]="'Product Name'"
+                    [type]="'text'" [hasIcon]="false">
+                </app-text-input>
+                <div class="form-group">
+                    <label for="comment">Description :</label>
+                    <textarea placeholder="Describe the product..." maxlength="{{maxDescriptionLength}}"
+                        (input)="getRemainingCommentLength()" class="form-control" formControlName="description"
+                        rows="6"></textarea>
+                    <small>Remaining characters: {{remainingDescriptionLength}}</small>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="form-group text-center">
+                    <h6 class="text-primary">Category & Type</h6>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Product Category</label>
+                    <input type="text" class="form-control" disabled value="{{product.productCategory}}">
+                </div>
+                <div class="form-group">
+                    <label for="product-type">Product Type</label>
+                    <input type="text" class="form-control" disabled value="{{product.productType}}">
+                </div>
+                <div class="form-group text-center">
+                    <h6 class="text-primary">Stock & Pricing</h6>
+                </div>
+                <app-text-input formControlName="price" [minimum]="0" [isRequiredAterisc]="true" [label]="'Price'"
+                    [type]="'number'" [hasIcon]="false"> </app-text-input>
+                <app-text-input formControlName="quantity" [minimum]="0" [isRequiredAterisc]="true"
+                    [label]="'Initial Quantity'" [type]="'number'" [hasIcon]="false"> </app-text-input>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="form-group text-center">
+                    <h6 class="text-primary">Technical Sheet</h6>
+                    <small><em>Leaving inputs blank <span class="text-warning">will not fill them</span> in the
+                            database</em></small>
+                </div>
+
+                <ng-container *ngFor="let info of infoCategories; let i = index">
+                    <div class="text-left">
+                        <p class="filter-toggle text-default" (click)="collapse(i)"
+                            [attr.aria-expanded]="!isCollapsed[i]" aria-controls="collapseBasic">
+                            {{info[0]}} <i class="fa" [ngClass]="isCollapsed[i] ? 'fa-angle-up' : 'fa-angle-down'"></i>
+                        </p>
+                    </div>
+                    <div [(ngbCollapse)]="!isCollapsed[i]">
+                        <ng-container *ngFor="let value of info[1]; let j = index">
+                            <ng-container *ngIf="value.unit">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label
+                                                for="{{value.additionalInfoName}}">{{value.additionalInfoName}}</label>
+                                            <input id="{{value.additionalInfoName}}" type="text" class="form-control"
+                                                (change)="onChange(i, j)" value="{{value.additionalInfoValue}}"
+                                                placeholder="Fill in the {{value.additionalInfoName}}...">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Unit</label>
+                                            <input type="text" class="form-control" value="{{value.unit}}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!value.unit">
+                                <div class="form-group">
+                                    <label for="{{value.additionalInfoName}}">{{value.additionalInfoName}}</label>
+                                    <input id="{{value.additionalInfoName}}" type="text" class="form-control"
+                                        placeholder="Fill in the {{value.additionalInfoName}}..."
+                                        (change)="onChange(i, j)" value="{{value.additionalInfoValue}}">
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cancel</button>
+        <button [disabled]="updateProductForm.invalid || loading" type="submit" class="btn btn-primary">Update product
+            <i *ngIf="loading" class="fa fa-spin fa-spinner"></i></button>
+    </div>
+</form>

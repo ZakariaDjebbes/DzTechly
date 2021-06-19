@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Core.Entities.Product;
+using Core.Entities.Products;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using System.Linq;

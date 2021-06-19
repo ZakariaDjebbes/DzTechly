@@ -1,7 +1,7 @@
 using System;
 using Core.Entities.Identity;
 
-namespace Core.Entities.Product
+namespace Core.Entities.Products
 {
     public class Review : BaseEntity
     {

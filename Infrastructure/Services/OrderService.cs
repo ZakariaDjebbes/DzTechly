@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities.Order;
-using Core.Entities.Product;
+using Core.Entities.Products;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Specifications;

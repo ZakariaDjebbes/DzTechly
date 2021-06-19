@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using Infrastructure.Exceptions;
 
 namespace API.Middleware
 {
@@ -28,9 +29,8 @@ namespace API.Middleware
 			try
 			{
 				await _next(context);
-
 			}
-			catch (Exception ex)
+			catch (Exception ex) when (!(ex is CustomException))
 			{
 				_logger.LogError(ex, ex.Message);
 				context.Response.ContentType = "application/json";

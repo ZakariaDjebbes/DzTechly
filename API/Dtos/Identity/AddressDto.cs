@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace API.Dtos.Identity
+﻿namespace API.Dtos.Identity
 {
 	public class AddressDto
 	{

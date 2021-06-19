@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkStepperModule } from '@angular/cdk/stepper';
-import { NgbCollapseModule, NgbNavModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbCollapseModule, NgbModalModule, NgbNavModule, NgbPaginationModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { PagerComponent } from './components/pager/pager.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { TotalsComponent } from './components/totals/totals.component';
@@ -21,15 +21,19 @@ import { StatusBadgeComponent } from './components/status-badge/status-badge.com
     NgbNavModule,
     NgbPaginationModule,
     NgbCollapseModule,
+    NgbModalModule,
+    NgbAccordionModule,
     ReactiveFormsModule,
     RouterModule,
     CdkStepperModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     NgbRatingModule,
     NgbNavModule,
     NgbPaginationModule,
+    NgbModalModule,
+    NgbAccordionModule,
     FormsModule,
     CdkStepperModule,
     ReactiveFormsModule,

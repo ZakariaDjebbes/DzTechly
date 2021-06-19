@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Self } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Self, Output } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -14,12 +15,14 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   @Input() iconClasses: string;
   @Input() hasIcon = false;
   @Input() isRequiredAterisc = false;
+  @Input() minimum = 0;
+
+  @Output() updated = new EventEmitter<any>();
 
   constructor(@Self() public controlDir: NgControl) {
     this.controlDir.valueAccessor = this;
   }
 
-  // tslint:disable-next-line: typedef
   ngOnInit() {
     const control = this.controlDir.control;
     const validators = control.validator ? [control.validator] : [];
@@ -30,10 +33,14 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     control.updateValueAndValidity();
   }
 
-  // tslint:disable-next-line: typedef
-  onChange(event) { }
+  onChange(event) {
 
-  // tslint:disable-next-line: typedef
+  }
+
+  onUpdate(event) {
+    this.updated.emit(event);
+  }
+
   onTouched() { }
 
   writeValue(obj: any): void {

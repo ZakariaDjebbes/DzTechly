@@ -117,8 +117,11 @@
         </div>
         <div class="col-lg-9">
           <div class="row row-grid">
+            <div *appHasRole="['Administrator']" class="col-lg-4 col-md-6 col-10 offset-1 offset-md-0 mb-4">
+              <app-admin-add-product [shopComponent]="this"></app-admin-add-product>
+            </div>
             <div class="col-lg-4 col-md-6 col-10 offset-1 offset-md-0 mb-4" *ngFor="let item of products">
-              <app-shop-item [product]='item'></app-shop-item>
+              <app-shop-item [shopComponent]="this" [product]='item'></app-shop-item>
             </div>
           </div>
         </div>

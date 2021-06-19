@@ -1,8 +1,5 @@
 import { CdkStepper } from '@angular/cdk/stepper';
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { ICart } from 'src/app/shared/models/Cart';
+import { Component, Input, OnInit } from '@angular/core';
 import { IAddress } from 'src/app/shared/models/IAddress';
 import { IPersonalInformation } from 'src/app/shared/models/IPersonalInformation';
 import { CartService } from '../../cart/cart.service';
@@ -34,7 +31,6 @@ export class CheckoutReviewComponent implements OnInit {
         this.cdkStepper.next();
       },
       (err) => {
-        console.error(err);
         this.loading = false;
       },
       () => {

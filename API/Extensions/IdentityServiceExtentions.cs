@@ -36,7 +36,6 @@ namespace API.Extensions
 
             services.AddAuthorization(opts => {
                 opts.AddPolicy("RequireAdministration", policy => policy.RequireRole("Administrator"));
-                opts.AddPolicy("RequireModeration", policy => policy.RequireRole("Moderator", "Administrator"));
             });
 
             services.Configure<IdentityOptions>(options =>

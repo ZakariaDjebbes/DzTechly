@@ -1,4 +1,7 @@
   <div class="card h-100 shadow border-0 shop-item" [ngClass]="{'item-out-of-stock': !product.isInStock}">
+    <button class="btn btn-icon btn-danger btn-sm btn-circle btn-action" (click)="openDeleteModal()" *appHasRole="['Administrator']" type="button">
+      <span class="btn-inner--icon"><i class="ni ni-fat-remove"></i></span>
+    </button>
     <div class="image position-relative p-1">
       <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid product-image">
       <div *ngIf="product.isInStock" class="d-flex align-items-center justify-content-center overlay">

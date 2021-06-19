@@ -1,0 +1,15 @@
+.filter-toggle {
+    font-size: 20px;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-weight: 400;
+    user-select: none;
+
+    &:hover {
+        color: #5F72E5 !important;
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}

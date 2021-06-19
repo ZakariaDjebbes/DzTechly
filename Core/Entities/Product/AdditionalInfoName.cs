@@ -1,4 +1,6 @@
-namespace Core.Entities.Product
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Core.Entities.Products
 {
     public class AdditionalInfoName : BaseEntity
     {
@@ -6,5 +8,8 @@ namespace Core.Entities.Product
         public string Unit { get; set; }
         public int ProductTypeId { get; set; }
         public ProductType ProductType { get; set; }
+        public int AdditionalInfoCategoryId { get; set; }
+        [ForeignKey("AdditionalInfoCategoryId")]
+        public AdditionalInfoCategory AdditionalInfoCategory { get; set; }
     }
 }

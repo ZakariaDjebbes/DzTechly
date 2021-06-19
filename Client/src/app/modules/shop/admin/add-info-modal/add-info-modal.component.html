@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title text-primary" >Add Category</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <ng-container *ngIf="errors">
+        <app-form-errors [errors]="errors"></app-form-errors>
+    </ng-container>
+    <div class="form-group">
+        <label for="info">Information name</label>
+        <input type="text" #info id="info" (change)="OnInfoChange()" placeholder="Enter the name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="unit">Information unit</label>
+        <input type="text" #unit id="unit" (change)="OnUnitChange()" placeholder="Enter the unit" class="form-control">
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Add</button>
+</div>

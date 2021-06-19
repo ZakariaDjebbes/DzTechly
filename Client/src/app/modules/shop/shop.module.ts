@@ -7,17 +7,25 @@ import { ShopItemComponent } from './shop-item/shop-item.component';
 import { ProductReviewComponent } from './product-review/product-review.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminAddProductComponent } from './admin/admin-add-product/admin-add-product.component';
+import { CoreModule } from 'src/app/core/core.module';
+import { AddProductModalComponent } from './admin/add-product-modal/add-product-modal.component';
+import { AddCategoryModalComponent } from './admin/add-category-modal/add-category-modal.component';
+import { AddInfoModalComponent } from './admin/add-info-modal/add-info-modal.component';
+import { DeleteProductModalComponent } from './admin/delete-product-modal/delete-product-modal.component';
+import { UpdateProductModalComponent } from './admin/update-product-modal/update-product-modal.component';
 
 
 
 @NgModule({
-  declarations: [ShopComponent, ShopItemComponent, ProductReviewComponent, ItemDetailsComponent],
+  declarations: [ShopComponent, ShopItemComponent, ProductReviewComponent, ItemDetailsComponent, AdminAddProductComponent, AddProductModalComponent, AddCategoryModalComponent, AddInfoModalComponent, DeleteProductModalComponent, UpdateProductModalComponent],
   imports: [
     CommonModule,
     SharedModule,
     ShopRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ],
   exports:[
     ShopComponent,

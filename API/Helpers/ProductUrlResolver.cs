@@ -1,6 +1,6 @@
 ﻿using API.Dtos.Product;
 using AutoMapper;
-using Core.Entities.Product;
+using Core.Entities.Products;
 using Microsoft.Extensions.Configuration;
 
 namespace API.Helpers

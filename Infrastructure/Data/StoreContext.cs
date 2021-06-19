@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Core.Entities.Product;
+using Core.Entities.Products;
 using Core.Entities.Identity;
 using Core.Entities.Order;
 using Microsoft.AspNetCore.Identity;

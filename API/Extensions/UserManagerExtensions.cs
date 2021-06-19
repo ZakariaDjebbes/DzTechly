@@ -14,7 +14,11 @@ namespace API.Extensions
 		{
 			var id = claimsPrincipal?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-			return await userManager.Users.Include(x => x.Address).Include(x => x.PersonalInformation).SingleOrDefaultAsync(x => x.Id == id);
+			return await userManager.Users
+			.Include(x => x.Address)
+			.Include(x => x.PersonalInformation)
+			.Include(x => x.WaitingProducts)
+			.SingleOrDefaultAsync(x => x.Id == id);
 		}
 
 		public static async Task<AppUser> FindByClaimsAsync(this UserManager<AppUser> userManager,

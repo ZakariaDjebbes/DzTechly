@@ -27,7 +27,9 @@ export interface IProduct {
   }
   
   export interface IProductInfo {
+    additionalInfoNameId: number,
     additionalInfoName: string,
     unit: string,
-    additionalInfoValue: string
+    additionalInfoValue: string,
+    Id: number
   }

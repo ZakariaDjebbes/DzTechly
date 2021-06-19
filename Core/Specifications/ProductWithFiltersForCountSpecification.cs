@@ -1,4 +1,4 @@
-﻿using Core.Entities.Product;
+﻿using Core.Entities.Products;
 using Core.Specifications.SpecificationParams;
 
 namespace Core.Specifications

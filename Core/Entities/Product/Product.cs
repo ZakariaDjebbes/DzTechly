@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Core.Entities.Identity;
 
-namespace Core.Entities.Product
+namespace Core.Entities.Products
 {
     public class Product : BaseEntity
     {
@@ -10,7 +10,7 @@ namespace Core.Entities.Product
         {
         }
 
-        public Product(IReadOnlyList<AppUser> waitingList, IReadOnlyList<Review> reviews, string name, string description, decimal price, string pictureUrl, ProductType productType, int productTypeId, ProductCategory productCategory, int productCategoryId, TechnicalSheet technicalSheet, int technicalSheetId, int quantity)
+        public Product(ICollection<AppUser> waitingList, IReadOnlyList<Review> reviews, string name, string description, decimal price, string pictureUrl, ProductType productType, int productTypeId, ProductCategory productCategory, int productCategoryId, TechnicalSheet technicalSheet, int quantity)
         {
             Name = name;
             Description = description;
@@ -22,7 +22,6 @@ namespace Core.Entities.Product
             ProductCategory = productCategory;
             ProductCategoryId = productCategoryId;
             TechnicalSheet = technicalSheet;
-            TechnicalSheetId = technicalSheetId;
             Quantity = quantity;
             WaitingList = waitingList;
         }
@@ -36,10 +35,9 @@ namespace Core.Entities.Product
         public ProductCategory ProductCategory { get; set; }
         public int ProductCategoryId { get; set; }
         public TechnicalSheet TechnicalSheet { get; set; }
-        public int TechnicalSheetId { get; set; }
         public int Quantity { get; set; }
         public IReadOnlyList<Review> Reviews { get; set; }
-        public IReadOnlyList<AppUser> WaitingList { get; set; }
+        public ICollection<AppUser> WaitingList { get; set; }
 
 		public int GetReviewsAverage()
 		{

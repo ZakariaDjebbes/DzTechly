@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Core.Entities.Product;
+using Core.Entities.Products;
 using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -29,7 +29,7 @@ namespace Infrastructure.Data
         {
             try
             {
-                if(!context.ProductCategories.Any())
+                if (!context.ProductCategories.Any())
                 {
                     var data = File.ReadAllText(PRODUCTS_CATEGORIES_PATH);
                     var list = JsonSerializer.Deserialize<List<ProductCategory>>(data);
@@ -40,7 +40,7 @@ namespace Infrastructure.Data
                     }
                 }
 
-                if(!context.ProductTypes.Any())
+                if (!context.ProductTypes.Any())
                 {
                     var data = File.ReadAllText(PRODUCTS_TYPES_PATH);
                     var list = JsonSerializer.Deserialize<List<ProductType>>(data);
@@ -51,7 +51,7 @@ namespace Infrastructure.Data
                     }
                 }
 
-                if(!context.AdditionalInfoCategories.Any())
+                if (!context.AdditionalInfoCategories.Any())
                 {
                     var data = File.ReadAllText(INFO_CATEGORIES_PATH);
                     var list = JsonSerializer.Deserialize<List<AdditionalInfoCategory>>(data);
@@ -62,29 +62,20 @@ namespace Infrastructure.Data
                     }
                 }
 
-                if(!context.AdditionalInfoNames.Any())
-                {
-                    var data = File.ReadAllText(INFO_NAMES_PATH);
-                    var list = JsonSerializer.Deserialize<List<AdditionalInfoName>>(data);
+                // if(!context.AdditionalInfoNames.Any())
+                // {
+                //     var data = File.ReadAllText(INFO_NAMES_PATH);
+                //     var list = JsonSerializer.Deserialize<List<AdditionalInfoName>>(data);
 
-                    foreach (var item in list)
-                    {
-                        context.AdditionalInfoNames.Add(item);
-                    }
-                }
+                //     foreach (var item in list)
+                //     {
+                //         context.AdditionalInfoNames.Add(item);
+                //     }
+                // }
 
-                if(!context.TechnicalSheets.Any())
-                {
-                    var data = File.ReadAllText(TECHNICAL_SHEETS_PATH);
-                    var list = JsonSerializer.Deserialize<List<TechnicalSheet>>(data);
 
-                    foreach (var item in list)
-                    {
-                        context.TechnicalSheets.Add(item);
-                    }
-                }
 
-                if(!context.Products.Any())
+                if (!context.Products.Any())
                 {
                     var data = File.ReadAllText(PRODUCTS_PATH);
                     var list = JsonSerializer.Deserialize<List<Product>>(data);
@@ -94,7 +85,16 @@ namespace Infrastructure.Data
                         context.Products.Add(item);
                     }
                 }
+                if (!context.TechnicalSheets.Any())
+                {
+                    var data = File.ReadAllText(TECHNICAL_SHEETS_PATH);
+                    var list = JsonSerializer.Deserialize<List<TechnicalSheet>>(data);
 
+                    foreach (var item in list)
+                    {
+                        context.TechnicalSheets.Add(item);
+                    }
+                }
                 if (!context.DeliveryMethods.Any())
                 {
                     var dmData = File.ReadAllText(DELIVERY_METHOD_PATH);
@@ -125,12 +125,10 @@ namespace Infrastructure.Data
                     {
                         await userManager.CreateAsync(user, "passw0rd");
 
-                        if (user.UserName == "Zakaria")
+                        if (user.UserName != "Nassim")
                             await userManager.AddToRoleAsync(user, "Client");
                         if (user.UserName == "Nassim")
-                            await userManager.AddToRolesAsync(user, new[] {"Moderator", "Administrator", "Client"});
-                        if (user.UserName == "Moderator")
-                            await userManager.AddToRolesAsync(user, new[] {"Moderator", "Client"});
+                            await userManager.AddToRolesAsync(user, new[] { "Administrator", "Client" });
                     }
                 }
             }

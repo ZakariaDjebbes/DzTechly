@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Core.Entities.Product;
+using Core.Entities.Products;
 
 namespace API.Dtos.Product
 {

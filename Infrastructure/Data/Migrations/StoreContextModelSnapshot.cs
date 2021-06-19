@@ -16,6 +16,21 @@ namespace Infrastructure.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.5");
 
+            modelBuilder.Entity("AppUserProduct", b =>
+                {
+                    b.Property<string>("WaitingListId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("WaitingProductsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("WaitingListId", "WaitingProductsId");
+
+                    b.HasIndex("WaitingProductsId");
+
+                    b.ToTable("AppUserProduct");
+                });
+
             modelBuilder.Entity("Core.Entities.Identity.Address", b =>
                 {
                     b.Property<int>("Id")
@@ -113,9 +128,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
@@ -134,8 +146,6 @@ namespace Infrastructure.Data.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -258,7 +268,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.AdditionalInfoCategory", b =>
+            modelBuilder.Entity("Core.Entities.Products.AdditionalInfoCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -272,10 +282,13 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AdditionalInfoCategories");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.AdditionalInfoName", b =>
+            modelBuilder.Entity("Core.Entities.Products.AdditionalInfoName", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdditionalInfoCategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -289,12 +302,14 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdditionalInfoCategoryId");
+
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("AdditionalInfoNames");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.Product", b =>
+            modelBuilder.Entity("Core.Entities.Products.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -326,21 +341,16 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TechnicalSheetId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProductCategoryId");
 
                     b.HasIndex("ProductTypeId");
 
-                    b.HasIndex("TechnicalSheetId");
-
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.ProductAdditionalInfo", b =>
+            modelBuilder.Entity("Core.Entities.Products.ProductAdditionalInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -352,24 +362,19 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("AdditionalInfoValue")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("AdditionalinfoCategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("TechnicalSheetId")
+                    b.Property<int>("TechnicalSheetId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AdditionalInfoNameId");
 
-                    b.HasIndex("AdditionalinfoCategoryId");
-
                     b.HasIndex("TechnicalSheetId");
 
                     b.ToTable("ProductAdditionalInfo");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.ProductCategory", b =>
+            modelBuilder.Entity("Core.Entities.Products.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -383,7 +388,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.ProductType", b =>
+            modelBuilder.Entity("Core.Entities.Products.ProductType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -402,7 +407,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.Review", b =>
+            modelBuilder.Entity("Core.Entities.Products.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -435,7 +440,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.TechnicalSheet", b =>
+            modelBuilder.Entity("Core.Entities.Products.TechnicalSheet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -444,10 +449,16 @@ namespace Infrastructure.Data.Migrations
                     b.Property<long>("LastUpdateDate")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<long>("ReferenceDate")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
 
                     b.ToTable("TechnicalSheets");
                 });
@@ -539,6 +550,21 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("AppUserProduct", b =>
+                {
+                    b.HasOne("Core.Entities.Identity.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("WaitingListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Products.Product", null)
+                        .WithMany()
+                        .HasForeignKey("WaitingProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Core.Entities.Identity.Address", b =>
                 {
                     b.HasOne("Core.Entities.Identity.AppUser", "AppUser")
@@ -547,13 +573,6 @@ namespace Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("Core.Entities.Identity.AppUser", b =>
-                {
-                    b.HasOne("Core.Entities.Product.Product", null)
-                        .WithMany("WaitingList")
-                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Core.Entities.Identity.AppUserRole", b =>
@@ -676,70 +695,66 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("ItemOrdered");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.AdditionalInfoName", b =>
+            modelBuilder.Entity("Core.Entities.Products.AdditionalInfoName", b =>
                 {
-                    b.HasOne("Core.Entities.Product.ProductType", "ProductType")
+                    b.HasOne("Core.Entities.Products.AdditionalInfoCategory", "AdditionalInfoCategory")
+                        .WithMany("InfoNames")
+                        .HasForeignKey("AdditionalInfoCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Products.ProductType", "ProductType")
                         .WithMany()
                         .HasForeignKey("ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("AdditionalInfoCategory");
+
                     b.Navigation("ProductType");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.Product", b =>
+            modelBuilder.Entity("Core.Entities.Products.Product", b =>
                 {
-                    b.HasOne("Core.Entities.Product.ProductCategory", "ProductCategory")
+                    b.HasOne("Core.Entities.Products.ProductCategory", "ProductCategory")
                         .WithMany()
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Product.ProductType", "ProductType")
+                    b.HasOne("Core.Entities.Products.ProductType", "ProductType")
                         .WithMany()
                         .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Product.TechnicalSheet", "TechnicalSheet")
-                        .WithMany()
-                        .HasForeignKey("TechnicalSheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
 
                     b.Navigation("ProductType");
-
-                    b.Navigation("TechnicalSheet");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.ProductAdditionalInfo", b =>
+            modelBuilder.Entity("Core.Entities.Products.ProductAdditionalInfo", b =>
                 {
-                    b.HasOne("Core.Entities.Product.AdditionalInfoName", "AdditionalInfoName")
+                    b.HasOne("Core.Entities.Products.AdditionalInfoName", "AdditionalInfoName")
                         .WithMany()
                         .HasForeignKey("AdditionalInfoNameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Product.AdditionalInfoCategory", "AdditionalInfoCategory")
-                        .WithMany()
-                        .HasForeignKey("AdditionalinfoCategoryId")
+                    b.HasOne("Core.Entities.Products.TechnicalSheet", "TechnicalSheet")
+                        .WithMany("ProductAddtionalInfos")
+                        .HasForeignKey("TechnicalSheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Product.TechnicalSheet", null)
-                        .WithMany("ProductAddtionalInfos")
-                        .HasForeignKey("TechnicalSheetId");
-
-                    b.Navigation("AdditionalInfoCategory");
-
                     b.Navigation("AdditionalInfoName");
+
+                    b.Navigation("TechnicalSheet");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.ProductType", b =>
+            modelBuilder.Entity("Core.Entities.Products.ProductType", b =>
                 {
-                    b.HasOne("Core.Entities.Product.ProductCategory", "ProductCategory")
+                    b.HasOne("Core.Entities.Products.ProductCategory", "ProductCategory")
                         .WithMany()
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -748,19 +763,30 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("ProductCategory");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.Review", b =>
+            modelBuilder.Entity("Core.Entities.Products.Review", b =>
                 {
                     b.HasOne("Core.Entities.Identity.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("Core.Entities.Product.Product", null)
+                    b.HasOne("Core.Entities.Products.Product", null)
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Core.Entities.Products.TechnicalSheet", b =>
+                {
+                    b.HasOne("Core.Entities.Products.Product", "Product")
+                        .WithOne("TechnicalSheet")
+                        .HasForeignKey("Core.Entities.Products.TechnicalSheet", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -818,14 +844,19 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.Product", b =>
+            modelBuilder.Entity("Core.Entities.Products.AdditionalInfoCategory", b =>
+                {
+                    b.Navigation("InfoNames");
+                });
+
+            modelBuilder.Entity("Core.Entities.Products.Product", b =>
                 {
                     b.Navigation("Reviews");
 
-                    b.Navigation("WaitingList");
+                    b.Navigation("TechnicalSheet");
                 });
 
-            modelBuilder.Entity("Core.Entities.Product.TechnicalSheet", b =>
+            modelBuilder.Entity("Core.Entities.Products.TechnicalSheet", b =>
                 {
                     b.Navigation("ProductAddtionalInfos");
                 });

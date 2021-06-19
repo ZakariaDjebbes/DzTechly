@@ -6,6 +6,7 @@ using Core.Entities.Order;
 using Core.Interfaces.Repositories;
 using Core.Interfaces.Services;
 using Core.Specifications;
+using Infrastructure.Exceptions;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 
@@ -28,61 +29,65 @@ namespace Infrastructure.Services
         {
             StripeConfiguration.ApiKey = _config["StripeSettings:SecretKey"];
 
-            var basket = await _cartRepository.GetCartAsync(basketId);
+            var cart = await _cartRepository.GetCartAsync(basketId);
 
-            if(basket == null)
+            if (cart == null)
             {
                 return null;
             }
 
             var shippingPrice = 0m;
 
-            if (basket.DeliveryMethodId.HasValue)
+            if (cart.DeliveryMethodId.HasValue)
             {
-                var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(basket.DeliveryMethodId.Value);
+                var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(cart.DeliveryMethodId.Value);
                 shippingPrice = deliveryMethod.Price;
             }
 
-            foreach (var item in basket.Items)
+            foreach (var item in cart.Items)
             {
-                var productItem = await _unitOfWork.Repository<Core.Entities.Product.Product>().GetByIdAsync(item.Id);
+                var productItem = await _unitOfWork.Repository<Core.Entities.Products.Product>().GetByIdAsync(item.Id);
+
+                if (productItem == null)
+                    throw new MissingProductException($"The product {item.ProductName} is no longer available. The product is going to be removed from you cart.", item.Id);
+
+                if (productItem.Quantity <= 0)
+                    throw new ProductNoLongerInStockException($"The product {item.ProductName} is not in stock. The product is going to be removed from you cart.", item.Id);
 
                 if (item.Price != productItem.Price)
-                {
                     item.Price = productItem.Price;
-                }
             }
 
             var service = new PaymentIntentService();
             PaymentIntent intent;
 
-            if (string.IsNullOrEmpty(basket.PaymentIntentId))
+            if (string.IsNullOrEmpty(cart.PaymentIntentId))
             {
-                var opts = new PaymentIntentCreateOptions 
+                var opts = new PaymentIntentCreateOptions
                 {
-                    Amount = (long)(shippingPrice * 100) + (long)(basket.Items.Sum(i => (i.Price * 100) * i.Quantity)),
+                    Amount = (long)(shippingPrice * 100) + (long)(cart.Items.Sum(i => (i.Price * 100) * i.Quantity)),
                     Currency = "usd",
                     PaymentMethodTypes = new List<string> { "card" }
                 };
 
                 intent = await service.CreateAsync(opts);
-                basket.PaymentIntentId = intent.Id;
-                basket.ClientSecret = intent.ClientSecret;
+                cart.PaymentIntentId = intent.Id;
+                cart.ClientSecret = intent.ClientSecret;
             }
             else
             {
                 var opts = new PaymentIntentUpdateOptions
                 {
-                    Amount = (long)(shippingPrice * 100) + (long)(basket.Items.Sum(i => (i.Price * 100) * i.Quantity)),
+                    Amount = (long)(shippingPrice * 100) + (long)(cart.Items.Sum(i => (i.Price * 100) * i.Quantity)),
                     Currency = "usd",
                 };
 
-                await service.UpdateAsync(basket.PaymentIntentId, opts);
+                await service.UpdateAsync(cart.PaymentIntentId, opts);
             }
 
-            await _cartRepository.CreateOrUpdateCartAsync(basket);
+            await _cartRepository.CreateOrUpdateCartAsync(cart);
 
-            return basket;
+            return cart;
         }
 
         public async Task<Core.Entities.Order.Order> UpdateOrderPaymentSuccessAsync(string paymentIntentId)
@@ -97,7 +102,7 @@ namespace Infrastructure.Services
 
             order.Status = OrderStatus.PayementReceived;
             _unitOfWork.Repository<Core.Entities.Order.Order>().Update(order);
-            
+
             await _unitOfWork.Complete();
             return order;
         }
@@ -113,7 +118,7 @@ namespace Infrastructure.Services
             }
 
             order.Status = OrderStatus.PayementFailed;
-            
+
             await _unitOfWork.Complete();
             return order;
         }

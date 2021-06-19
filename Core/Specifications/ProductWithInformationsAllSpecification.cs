@@ -1,11 +1,11 @@
-﻿using Core.Entities.Product;
+﻿using Core.Entities.Products;
 using Core.Specifications.SpecificationParams;
 
 namespace Core.Specifications
 {
-	public class ProductWithBrandAndTypeSpecification : BaseSpecification<Product>
+	public class ProductWithInformationsAllSpecification : BaseSpecification<Product>
 	{
-		public ProductWithBrandAndTypeSpecification(ProductSpecificationParams specParams) 
+		public ProductWithInformationsAllSpecification(ProductSpecificationParams specParams) 
 			: base(x => 
 			(string.IsNullOrEmpty(specParams.Search) || x.Name.ToLower().Contains(specParams.Search)) &&
 			(!specParams.CategoryId.HasValue || x.ProductCategoryId == specParams.CategoryId) &&
@@ -18,10 +18,11 @@ namespace Core.Specifications
 			AddInclude(x => x.ProductCategory);
 			AddInclude(x => x.ProductType);
 			AddInclude(x => x.TechnicalSheet);
+			AddInclude(x => x.WaitingList);
 			AddInclude("Reviews.AppUser");
 			AddInclude("TechnicalSheet.ProductAddtionalInfos");
 			AddInclude("TechnicalSheet.ProductAddtionalInfos.AdditionalInfoName");
-			AddInclude("TechnicalSheet.ProductAddtionalInfos.AdditionalInfoCategory");
+			AddInclude("TechnicalSheet.ProductAddtionalInfos.AdditionalInfoName.AdditionalInfoCategory");
 
 			SetOrderBy(x => x.Name);
 			ApplyPaging(specParams.PageSize * (specParams.PageIndex - 1),  specParams.PageSize); 
@@ -43,16 +44,17 @@ namespace Core.Specifications
 			}
 		}
 
-		public ProductWithBrandAndTypeSpecification(int id)
+		public ProductWithInformationsAllSpecification(int id)
 			: base(x => x.Id == id)
 		{
 			AddInclude(x => x.ProductCategory);
 			AddInclude(x => x.TechnicalSheet);
 			AddInclude(x => x.ProductType);
+			AddInclude(x => x.WaitingList);
 			AddInclude("Reviews.AppUser");
 			AddInclude("TechnicalSheet.ProductAddtionalInfos");
 			AddInclude("TechnicalSheet.ProductAddtionalInfos.AdditionalInfoName");
-			AddInclude("TechnicalSheet.ProductAddtionalInfos.AdditionalInfoCategory");
+			AddInclude("TechnicalSheet.ProductAddtionalInfos.AdditionalInfoName.AdditionalInfoCategory");
 		}
 	}
 }

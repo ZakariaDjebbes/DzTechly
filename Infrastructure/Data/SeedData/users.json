@@ -1,7 +1,7 @@
 [
     {
         "UserName": "Zakaria",
-        "Email": "zakaria.djebbes@gmail.com",
+        "Email": "orochi255@hotmail.fr",
         "Address":
         {
             "Street": "250 Logement",
@@ -14,7 +14,7 @@
             "FirstName": "Zakaria",
             "LastName": "Djebbes"
         },
-        "EmailConfirmed": false
+        "EmailConfirmed": true
     },
     {
         "UserName": "Nassim",

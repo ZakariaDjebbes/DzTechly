@@ -1,6 +1,7 @@
 [
     {
         "Id":1,
+        "ProductId": 1,
         "ProductAddtionalInfos":[
             {
                 "AdditionalinfoCategoryId":1,
@@ -131,6 +132,7 @@
     },
     {
         "Id":2,
+        "ProductId": 2,
         "ProductAddtionalInfos":[
             {
                 "AdditionalinfoCategoryId":1,

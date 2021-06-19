@@ -7,7 +7,6 @@
         "Price":20000,
         "ProductTypeId":7,
         "ProductCategoryId":1,
-        "TechnicalSheetId":1,
         "Quantity":13
     },
     {
@@ -18,7 +17,6 @@
         "Price":1340,
         "ProductTypeId":7,
         "ProductCategoryId":1,
-        "TechnicalSheetId":2,
         "Quantity":0
     }
 ]

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { IAddress } from 'src/app/shared/models/IAddress';
+import { IPersonalInformation } from 'src/app/shared/models/IPersonalInformation';
 import { IUser } from 'src/app/shared/models/IUser';
 import { AccountService } from '../account.service';
 
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
     this.user$ = this.accountService.currentUser$;
     this.createAccountForm();
     this.getAddressForValues();
+    this.getPersonalInfoForValues();
   }
 
   onProfileSubmit(): void {
@@ -31,7 +33,7 @@ export class ProfileComponent implements OnInit {
     this.accountService.updateUser(this.accountForm.get('profileForm').value).subscribe(
       (user) => {
         this.toastr.success('Your profile has been updated');
-        this.errors = [];
+        this.errors = null;
         this.loading = false;
       },
       (error) => {
@@ -43,49 +45,69 @@ export class ProfileComponent implements OnInit {
   }
 
   onPasswordSubmit(): void {
-      this.loading = true;
+    this.loading = true;
 
-      this.accountService.updateUserPassword(this.accountForm.get('passwordForm').value).subscribe(
-        () => {
-          this.toastr.success('Your password has been updated');
-          this.errors = [];
-          this.loading = false;
-        },
-        (error) => {
-          console.error(error);
-          this.errors = error.errors;
-          this.loading = false;
-        }
-      );
+    this.accountService.updateUserPassword(this.accountForm.get('passwordForm').value).subscribe(
+      () => {
+        this.toastr.success('Your password has been updated');
+        this.errors = null;
+        this.loading = false;
+      },
+      (error) => {
+        console.error(error);
+        this.errors = error.errors;
+        this.loading = false;
+      }
+    );
   }
 
   onAddressSubmit(): void {
     this.loading = true;
     this.accountService.updateUserAddress(this.accountForm.get('addressForm').value)
-    .subscribe((address: IAddress) => {
-      this.toastr.success('Address saved');
-      console.log(address);
-      this.accountForm.get('addressForm').reset(address);
-      this.errors = [];
-      this.loading = false;
-    }, error => {
-      this.toastr.error(error.message);
-      this.errors = error.errors;
-      console.log(error);
-      this.loading = false;
-    });
+      .subscribe((address: IAddress) => {
+        this.toastr.success('Address saved');
+        this.accountForm.get('addressForm').reset(address);
+        this.errors = null;
+        this.loading = false;
+      }, error => {
+        this.toastr.error(error.message);
+        this.errors = error.errors;
+        console.log(error);
+        this.loading = false;
+      });
+  }
+
+  onPersonalInfoSubmit(): void {
+    this.loading = true;
+    this.accountService.updateUserInformations(this.accountForm.get('personalInfoForm').value).subscribe(
+      (info: IPersonalInformation) => {
+        this.toastr.success('Personal informations saved!');
+        this.accountForm.get('personalInfoForm').reset(info);
+        this.errors = null;
+        this.loading = false;
+      },
+      error => {
+        this.toastr.error(error.message);
+        this.errors = error.errors;
+        console.log(error);
+        this.loading = false;
+      }
+    )
   }
 
   private createAccountForm(): void {
     this.accountForm = this.formBuilder.group(
       {
         addressForm: this.formBuilder.group({
-          firstName: [null, Validators.required],
-          lastName: [null, Validators.required],
-          country: [null, Validators.required],
-          city: [null, Validators.required],
-          zipcode: [null, Validators.required],
-          street: [null, Validators.required],
+          wilaya: [null, []],
+          city: [null, []],
+          street: [null, []],
+          zipcode: [null, []],
+        }),
+        personalInfoForm: this.formBuilder.group({
+          firstName: [null, []],
+          lastName: [null, []],
+          birthDate: [null, []]
         }),
         profileForm: this.formBuilder.group({
           userName: [null, [Validators.required], [this.validateUserNotTaken()]],
@@ -95,7 +117,7 @@ export class ProfileComponent implements OnInit {
           ],
           password: [null, [Validators.required]],
           confirmPassword: [null, [Validators.required]]
-        }, {validators: this.passwordsMatchValidator}),
+        }, { validators: this.passwordsMatchValidator }),
         passwordForm: this.formBuilder.group({
           oldPassword: [null, [Validators.required]],
           confirmOldPassword: [null, [Validators.required]],
@@ -109,13 +131,20 @@ export class ProfileComponent implements OnInit {
 
   getAddressForValues(): void {
     this.accountService.getUserAddress().subscribe(address => {
-      if (address)
-      {
+      if (address) {
         this.accountForm.get('addressForm').patchValue(address);
       }
     }, (error) => {
       console.error(error);
     });
+  }
+
+  getPersonalInfoForValues(): void {
+    this.accountService.getUserInfos().subscribe(res => {
+      if (res) {
+        this.accountForm.get('personalInfoForm').patchValue(res);
+      }
+    }, (error) => console.log(error));
   }
 
   validateEmailNotTaken(): AsyncValidatorFn {

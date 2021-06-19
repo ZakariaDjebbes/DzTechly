@@ -7,7 +7,7 @@ using AutoMapper;
 using Core.Entities.Cart;
 using Core.Entities.Identity;
 using Core.Entities.Order;
-using Core.Entities.Product;
+using Core.Entities.Products;
 using Core.Specifications;
 
 namespace API.Helpers
@@ -25,11 +25,16 @@ namespace API.Helpers
             .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
 
             CreateMap<TechnicalSheet, TechnicalSheetDto>()
-            .ForMember(d => d.ProductAddtionalInfos, o => o.MapFrom(s => s.ProductAddtionalInfos.OrderBy(x => x.AdditionalinfoCategoryId).GroupBy(x => x.AdditionalInfoCategory.Name).ToDictionary(x => x.Key, x => x.OrderBy(x => x.AdditionalInfoName.Name).ToList())));
+            .ForMember(d => d.ProductAddtionalInfos, o => o.MapFrom(s => s.ProductAddtionalInfos.OrderBy(x => x.AdditionalInfoName.AdditionalInfoCategoryId).GroupBy(x => x.AdditionalInfoName.AdditionalInfoCategory.Name).ToDictionary(x => x.Key, x => x.OrderBy(x => x.AdditionalInfoName.Name).ToList())))
+            .ForMember(x => x.Id, o => o.MapFrom(x => x.Id));
+
+            CreateMap<AppUser, UserForWaitingDto>()
+            .ReverseMap();
 
             CreateMap<ProductAdditionalInfo, ProductAdditionalInfoDto>()
             .ForMember(d => d.AdditionalInfoName, o => o.MapFrom(s => s.AdditionalInfoName.Name))
-            .ForMember(d => d.Unit, o => o.MapFrom(s => s.AdditionalInfoName.Unit));
+            .ForMember(d => d.Unit, o => o.MapFrom(s => s.AdditionalInfoName.Unit))
+            .ForMember(d => d.Id, o => o.MapFrom(s => s.Id));
 
             CreateMap<ProductType, ProductTypeDto>()
             .ForMember(d => d.ProductCategory, o => o.MapFrom(s => s.ProductCategory.Name));
@@ -54,7 +59,22 @@ namespace API.Helpers
                 .ForMember(oi => oi.ProductId, o => o.MapFrom(s => s.ItemOrdered.ProductItemId))
                 .ForMember(oi => oi.PictureUrl, o => o.MapFrom(s => s.ItemOrdered.PictureUrl))
                 .ForMember(oi => oi.PictureUrl, o => o.MapFrom<OrderItemUrlResolver>());
-			CreateMap<AddressDto, Core.Entities.Order.Address>();
+            CreateMap<AddressDto, Core.Entities.Order.Address>();
+            CreateMap<AdditionalInfoName, AdditionalInfoNameDto>()
+            .ForMember(x => x.AdditionalInfoNameId, o => o.MapFrom(x => x.Id))
+            .ForMember(x => x.AdditionalInfoCategoryName, o => o.MapFrom(x => x.AdditionalInfoCategory.Name))
+            .ForMember(x => x.AdditionalInfoCategoryId, o => o.MapFrom(x => x.AdditionalInfoCategoryId));
+
+            CreateMap<ProductToCreate, Product>();
+            CreateMap<AdditionalInfoValueDto, ProductAdditionalInfo>()
+            .ForPath(x => x.AdditionalInfoName.Id, o => o.MapFrom(x => x.NameId))
+            .ForPath(x => x.AdditionalInfoValue, o => o.MapFrom(x => x.Value))
+            .ForMember(x => x.AdditionalInfoNameId, o => o.MapFrom(x => x.NameId))
+            .ForPath(x => x.AdditionalInfoName.Unit, o => o.MapFrom(x => x.Unit))
+            .ForPath(x => x.AdditionalInfoName.Name, o => o.MapFrom(x => x.Name))
+            .ForPath(x => x.AdditionalInfoName.AdditionalInfoCategoryId, o => o.MapFrom(x => x.CategoryId))
+            .ForPath(x => x.AdditionalInfoName.AdditionalInfoCategory.Name, o => o.MapFrom(x => x.Category))
+            .ForPath(x => x.AdditionalInfoName.AdditionalInfoCategory.Id, o => o.MapFrom(x => x.CategoryId));
         }
     }
 }

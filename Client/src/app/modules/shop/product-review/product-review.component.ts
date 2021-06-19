@@ -94,6 +94,7 @@ export class ProductReviewComponent implements OnInit {
       () => {
         this.user$.subscribe(u => {
           this.currentReview = this.reviews.find(x => x.userName === u.userName);
+          console.log(this.currentReview);
         });
       }
     );

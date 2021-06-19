@@ -28,33 +28,6 @@
                 <a class="nav-link" href="" [routerLink]="['/shop']">
                     <i class="ni ni-bullet-list-67"></i> Products</a>
             </li>
-            <!-- <li class="nav-item dropdown" ngbDropdown display="dynamic" placement="bottom-right">
-                <a class="nav-link dropdown" ngbDropdownToggle role="button">
-                    <i class="ni ni-bullet-list-67"></i> Products
-                </a>
-                <div ngbDropdownMenu class="p-4" style="width: 450px;">
-                    <h6><a href="" [routerLink]="['/shop']">View all products</a></h6>
-                    <div class="row">
-                        <ul class="category-list col">
-                            <li class="category"><a href="">Part</a></li>
-                            <li class="type"><a class="text-default" href="" >Cpu</a></li>
-                            <li class="type"><a class="text-default" href="">Gpu</a></li>
-                            <li class="type"><a class="text-default" href="">Ram</a></li>
-                        </ul>
-                        <ul class="category-list col">
-                            <li class="category"><a href="">Peripheral</a></li>
-                            <li class="type"><a class="text-default" href="">Keyboard/Mouse</a></li>
-                            <li class="type"><a class="text-default" href="">Screen</a></li>
-                            <li class="type"><a class="text-default" href="">Printer</a></li>
-                        </ul>
-                        <ul class="category-list col">
-                            <li class="category"><a href="">Portable</a></li>
-                            <li class="type"><a class="text-default" href="">Computer</a></li>
-                            <li class="type"><a class="text-default" href="">Tablet</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="ni ni-settings"></i> Configure your pc</a>
             </li>
@@ -86,6 +59,10 @@
                         </a>
                         <a ngbDropdownItem routerLink="/orders" class="dropdown-item d-flex align-items-center">
                             <i class="fa fa-history fa-fw mr-3"></i>View Orders
+                        </a>
+                        <div class="dropdown-divider" *appHasRole="['Administrator']"></div>
+                        <a ngbDropdownItem routerLink="/dashboard" class="dropdown-item d-flex align-items-center" *appHasRole="['Administrator']">
+                            <i class="ni ni-settings-gear-65 fa-fw mr-3"></i>Dashboard
                         </a>
                         <div class="dropdown-divider"></div>
                         <a ngbDropdownItem (click)="logout()" href="" class="dropdown-item d-flex align-items-center">

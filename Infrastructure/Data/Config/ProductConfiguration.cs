@@ -1,4 +1,4 @@
-﻿using Core.Entities.Product;
+﻿using Core.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,6 +16,7 @@ namespace Infrastructure.Data.Config
 			builder.HasOne(t => t.ProductType).WithMany().HasForeignKey(p => p.ProductTypeId);
 			builder.HasOne(t => t.ProductCategory).WithMany().HasForeignKey(p => p.ProductCategoryId);
 			builder.HasMany(o => o.Reviews).WithOne().OnDelete(DeleteBehavior.Cascade);
-		}
+			builder.HasOne(o => o.TechnicalSheet).WithOne().OnDelete(DeleteBehavior.Cascade);
+		} 
 	}
 }
