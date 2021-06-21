@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Updating <span class="text-primary">{{user.userName}}</span></h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ng-container *ngIf="errors">
+    <app-form-errors [errors]="errors"></app-form-errors>
+  </ng-container>
+  <form [formGroup]="updateUserForm">
+    <h5>User roles</h5>
+    <div class="form-row">
+
+      <div class="col-4 text-center mb-1" *ngFor="let role of roles">
+        <div class="custom-control custom-checkbox">
+          <input [checked]="user.userRoles.includes(role)" value="{{role}}" 
+            (change)="onChecked(role)" type="checkbox" class="custom-control-input" id="{{role}}">
+          <label class="custom-control-label" for="{{role}}">{{role}}</label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary mr-2" (click)="activeModal.close()">Close</button>
+  <button type="button" class="btn btn-outline-primary" [disabled]="loading" (click)="updateUserRoles()">Save changes <i
+      *ngIf="loading" class="fa fa-spin fa-spinner"></i></button>
+</div>
