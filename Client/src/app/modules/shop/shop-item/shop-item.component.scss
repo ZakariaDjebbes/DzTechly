@@ -12,10 +12,17 @@
     width: 30%;
     height: 40px;
 
-    &.btn-action {
+    &.btn-delete {
         position: absolute;
         z-index: 999;
         left: 95%;
+        top: -2.5%;
+    }
+    
+    &.btn-update {
+        position: absolute;
+        z-index: 999;
+        left: 86%;
         top: -2.5%;
     }
 }

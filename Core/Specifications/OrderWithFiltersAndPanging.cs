@@ -30,5 +30,29 @@ namespace Core.Specifications
                     break;
             }
         }
+
+        public OrderWithFiltersAndPanging(OrderSpecificationParams specParams)
+        {
+            AddInclude(o => o.OrderItems);
+            AddInclude(o => o.DeliveryMethod);
+
+            ApplyPaging(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
+
+            switch (specParams.Sort)
+            {
+                case "dateAsc":
+                    SetOrderBy(x => x.OrderDate);
+                    break;
+                case "idAsc":
+                    SetOrderBy(x => x.Id);
+                    break;
+                case "idDesc":
+                    SetOrderByDescending(x => x.Id);
+                    break;
+                default:
+                    SetOrderByDescending(x => x.OrderDate);
+                    break;
+            }
+        }
     }
 }

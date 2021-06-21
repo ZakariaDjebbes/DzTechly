@@ -4,6 +4,7 @@ namespace API.Dtos.Product
 {
     public class ReviewToReturnDto
     {
+        public int Id { get; set; }
         public string Comment { get; set; }
         public int Stars { get; set; }
         public DateTimeOffset ReviewDate { get; set; }

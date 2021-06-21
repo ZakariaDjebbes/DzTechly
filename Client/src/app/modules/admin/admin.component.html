@@ -33,16 +33,18 @@
     </section>
   </div>
   <section class="section section-lg">
-    <div class="mx-5">
+    <div class="container">
       <ul ngbNav #nav="ngbNav" class="nav-pills">
         <li [ngbNavItem]="1">
-          <a ngbNavLink>Manage products</a>
+          <a ngbNavLink><i class="fa fa-users"></i> Manage Users</a>
           <ng-template ngbNavContent>
+            <app-users-administration></app-users-administration>
           </ng-template>
         </li>
         <li [ngbNavItem]="2">
-          <a ngbNavLink>Statistics</a>
+          <a ngbNavLink><i class="fa fa-list"></i> Orders History</a>
           <ng-template ngbNavContent>
+            <app-orders-history></app-orders-history>
           </ng-template>
         </li>
       </ul>

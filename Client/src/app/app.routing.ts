@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'cart', loadChildren: () => import('./modules/cart/cart.module').then(mod => mod.CartModule) },
   {path: 'orders', loadChildren: () => import('./modules/orders/orders.module').then(mod => mod.OrdersModule), canActivate: [AuthGuard]},
   {path: 'checkout', loadChildren: () => import('./modules/checkout/checkout.module').then(mod => mod.CheckoutModule), canActivate: [AuthGuard]},
-  {path:'dashboard', loadChildren: () => import('./modules/admin/admin.module').then(mod => mod.AdminModule), canActivate:[AuthGuard]},
+  {path:'dashboard', loadChildren: () => import('./modules/admin/admin.module').then(mod => mod.AdminModule), canActivate:[AuthGuard], data: { roles: ['Administrator']}},
   {path: '**', redirectTo: 'not-found', pathMatch: 'full'}
 ];
 

@@ -32,4 +32,23 @@ export class OrdersService {
   public getOrder(orderId: number) {
     return this.http.get<IOrder>(this.baseUrl + `order/${orderId}`);
   }
+
+  public getAllOrders(orderParams: OrderParams) {
+    let params = new HttpParams();
+
+    params = params.append('sort', orderParams.sort);
+    params = params.append('pageIndex', orderParams.pageNumber.toString());
+    params = params.append('pageSize', orderParams.pageSize.toString());
+    return this.http.get<IPagination<IOrder>>(this.baseUrl + 'order/all', { observe: 'response', params })
+    .pipe(
+      map(response => {
+        return response.body;
+      })
+    );
+  }
+
+  public getAdministrationOrder(orderId: number)
+  {
+    return this.http.get<IOrder>(this.baseUrl + `order/admin/${orderId}`);
+  }
 }

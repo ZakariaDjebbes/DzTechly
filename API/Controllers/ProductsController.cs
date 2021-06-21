@@ -276,5 +276,15 @@ namespace Infrastructure.Controllers
             return
             Ok(new Pagination<ReviewToReturnDto>(specParams.PageIndex, specParams.PageSize, totalItems, data));
         }
+
+        [Authorize(Policy = "RequireAdministration")]
+        [HttpDelete("review")]
+        public async Task<ActionResult> DeleteReview([Required] [FromQuery] int id)
+        {
+            var review = await _unitOfWork.Repository<Review>().GetByIdAsync(id);
+            _unitOfWork.Repository<Review>().Delete(review);
+            await _unitOfWork.Complete();
+            return Ok();
+        }
     }
 }

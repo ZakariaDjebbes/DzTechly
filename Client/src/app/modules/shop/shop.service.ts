@@ -107,6 +107,10 @@ export class ShopService {
     return this.http.post(this.baseUrl + 'products/review', review);
   }
 
+  public deleteReview(id: number) {
+    return this.http.delete(this.baseUrl + 'products/review?id=' + id);
+  }
+
   public addProduct(product: IProductToCreate) {
     return this.http.post(this.baseUrl + 'products', product);
   }

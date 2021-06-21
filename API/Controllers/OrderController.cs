@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using API.Dtos;
 using AutoMapper;
 using Core.Entities.Order;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +11,6 @@ using Core.Interfaces.Services;
 using API.Dtos.Order;
 using API.Dtos.Identity;
 using Core.Specifications.SpecificationParams;
-using API.Helpers;
 using Core.Specifications;
 
 namespace API.Controllers
@@ -51,7 +49,7 @@ namespace API.Controllers
         {
             var email = HttpContext.User?.GetEmailFromClaims();
             var orders = await _orderService.GetOrdersOfUserAsync(email, specParams);
-            
+
             return Ok(_mapper.Map<Pagination<Order>, Pagination<OrderToReturnDto>>(orders));
         }
 
@@ -65,6 +63,26 @@ namespace API.Controllers
             if (order == null) return NotFound(new ApiResponse(404));
 
             return Ok(_mapper.Map<Order, OrderToReturnDto>(order));
+        }
+
+        [Authorize]
+        [HttpGet("admin/{id}")]
+        public async Task<ActionResult<OrderToReturnDto>> GetAdministrationOrderById([Required] int id)
+        {
+            var order = await _orderService.GetOrderByIdAsync(id);
+
+            if (order == null) return NotFound(new ApiResponse(404));
+
+            return Ok(_mapper.Map<Order, OrderToReturnDto>(order));
+        }
+
+        [Authorize(Policy = "RequireAdministration")]
+        [HttpGet("all")]
+        public async Task<ActionResult<OrderToReturnDto>> GetAllOrders([FromQuery] OrderSpecificationParams specParams)
+        {
+            var orders = await _orderService.GetAllOrders(specParams);
+
+            return Ok(_mapper.Map<Pagination<Order>, Pagination<OrderToReturnDto>>(orders));
         }
 
         [HttpGet("deliveryMethods")]

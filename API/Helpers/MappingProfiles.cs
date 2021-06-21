@@ -28,6 +28,9 @@ namespace API.Helpers
             .ForMember(d => d.ProductAddtionalInfos, o => o.MapFrom(s => s.ProductAddtionalInfos.OrderBy(x => x.AdditionalInfoName.AdditionalInfoCategoryId).GroupBy(x => x.AdditionalInfoName.AdditionalInfoCategory.Name).ToDictionary(x => x.Key, x => x.OrderBy(x => x.AdditionalInfoName.Name).ToList())))
             .ForMember(x => x.Id, o => o.MapFrom(x => x.Id));
 
+            CreateMap<AppUser, UserForAdministrationDto>()
+            .ForMember(x => x.UserRoles, o => o.MapFrom(x => x.UserRoles.Select(x => x.Role.Name)));
+
             CreateMap<AppUser, UserForWaitingDto>()
             .ReverseMap();
 

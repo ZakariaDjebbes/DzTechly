@@ -40,6 +40,7 @@
         <h3>What others think of this product</h3>
         <ng-container *ngFor="let review of reviews">
             <div class="my-3">
+                <button class="btn btn-circle btn-action btn-danger" *appHasRole="['Administrator']" (click)="openDeleteModal(review.id)"><i class="fa fa-times"></i></button>
                 <h5>{{review.userName}} <small
                         class="float-right review-date">{{review.reviewDate|date:'short'}}</small></h5>
                 <ngb-rating [rate]="review.stars" [max]="max" [readonly]="true" style="color: #5E72E4;font-size: 15px;">

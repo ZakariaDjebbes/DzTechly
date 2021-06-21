@@ -69,6 +69,16 @@ namespace Infrastructure.Services
             return order;
         }
 
+        public async Task<Pagination<Order>> GetAllOrders(OrderSpecificationParams specParams)
+        {
+            var spec = new OrderWithFiltersAndPanging(specParams);
+
+            var data = await _unitOfWork.Repository<Order>().GetListAllWithSpecAsync(spec);
+            var totalCount = data.Count;
+
+            return new Pagination<Order>(specParams.PageIndex, specParams.PageSize, totalCount, data);
+        }
+
         public async Task<DeliveryMethod> GetDeliveryMethodAsync(int id)
         {
             return await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(id);
@@ -82,6 +92,12 @@ namespace Infrastructure.Services
         public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
         {
             var spec = new OrderWithItemsAndMethodSpecification(id, buyerEmail);
+            return await _unitOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
+        }
+
+        public async Task<Order> GetOrderByIdAsync(int id)
+        {
+            var spec = new OrderWithItemsAndMethodSpecification(id);
             return await _unitOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
         }
 

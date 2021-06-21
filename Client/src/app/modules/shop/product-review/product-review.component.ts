@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IReview } from 'src/app/shared/models/IReview';
@@ -7,6 +8,7 @@ import { IReviewToCreate } from 'src/app/shared/models/IReviewToCreate';
 import { IUser } from 'src/app/shared/models/IUser';
 import { ReviewParams } from 'src/app/shared/models/Params';
 import { AccountService } from '../../account/account.service';
+import { DeleteReviewModalComponent } from '../admin/delete-review-modal/delete-review-modal.component';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -30,7 +32,7 @@ export class ProductReviewComponent implements OnInit {
   loading = false;
   totalCount: number;
 
-  constructor(private shopService: ShopService, private accountService: AccountService) { }
+  constructor(private shopService: ShopService, private accountService: AccountService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.createReviewForm();
@@ -105,5 +107,14 @@ export class ProductReviewComponent implements OnInit {
       this.reviewParams.pageNumber = event;
       this.getReviews();
     }
+  }
+
+  openDeleteModal(id: number): void {
+    const modalRef = this.modalService.open(DeleteReviewModalComponent, {
+      size: 'md',
+    });
+
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.reviewsComponent = this;
   }
 }

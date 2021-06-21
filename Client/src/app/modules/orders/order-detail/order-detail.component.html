@@ -11,8 +11,13 @@
             <span></span>
         </div>
         <div class="container pt-lg-md py-5">
-            <div class="card shadow p-5">
+            <div class="text-right">
+                <button (click)="getPdf()" class="btn btn-primary">Get as PDF <i class="fa fa-file-pdf-o
+                    text-danger"></i></button>
+            </div>
+            <div class="card shadow p-5" id="content">
                 <div *ngIf="order">
+                    <h4 class="font-weight-bold text-primary">Payment #{{order.paymentIntentId}}</h4>
                     <h4 class="font-weight-bold border-bottom mb-3 text-primary">Order #{{order.id}}</h4>
                     <ul class="list-unstyled">
                         <li class="mb-3">
@@ -25,13 +30,16 @@
                             <span class="font-weight-bold">Date of Order:</span> {{order.orderDate|date:'medium'}}
                         </li>
                         <li class="mb-3">
-                            <span class="font-weight-bold">Buyer Name:</span> {{order.personalInformation.firstName}} {{order.personalInformation.lastName}}
+                            <span class="font-weight-bold">Buyer Name:</span> {{order.personalInformation.firstName}}
+                            {{order.personalInformation.lastName}}
                         </li>
                         <li class="mb-3">
-                            <span class="font-weight-bold">Buyer Birth Date:</span> {{order.personalInformation.birthDate|date:'shortDate'}} 
+                            <span class="font-weight-bold">Buyer Birth Date:</span>
+                            {{order.personalInformation.birthDate|date:'shortDate'}}
                         </li>
                         <li class="mb-3">
-                            <span class="font-weight-bold">Delivery Method:</span> {{order.deliveryMethod}} ({{order.shippingPrice|currency}})
+                            <span class="font-weight-bold">Delivery Method:</span> {{order.deliveryMethod}}
+                            ({{order.shippingPrice|currency}})
                         </li>
                     </ul>
                     <h4 class="font-weight-bold border-bottom my-4 text-primary">Delivery Address </h4>
@@ -40,10 +48,11 @@
                             <span class="font-weight-bold">Wilaya:</span> {{order.shipToAddress.wilaya}}
                         </li>
                         <li class="mb-3">
-                            <span class="font-weight-bold">City:</span> {{order.shipToAddress.city}} {{order.personalInformation.lastName}}
+                            <span class="font-weight-bold">City:</span> {{order.shipToAddress.city}}
+                            {{order.personalInformation.lastName}}
                         </li>
                         <li class="mb-3">
-                            <span class="font-weight-bold">Street:</span> {{order.shipToAddress.street}} 
+                            <span class="font-weight-bold">Street:</span> {{order.shipToAddress.street}}
                         </li>
                     </ul>
                     <h4 class="font-weight-bold border-bottom my-4 text-primary">Products & Pricing: </h4>
@@ -72,7 +81,7 @@
                                             <img src="{{item.pictureUrl}}" alt="{{item.productName}}" class="img-fluid"
                                                 style="max-height: 50px">
                                             <div class="ml-3 d-inline-block align-middle">
-                                                <a class="mb-0"  routerLink="/shop/{{item.productId}}">
+                                                <a class="mb-0" routerLink="/shop/{{item.productId}}">
                                                     {{item.productName}}
                                                 </a>
                                             </div>

@@ -11,6 +11,12 @@ namespace Core.Specifications
             SetOrderByDescending(o => o.OrderDate);
         }
 
+        public OrderWithItemsAndMethodSpecification(int id) : base(o => o.Id == id)
+        {
+            AddInclude(o => o.OrderItems);
+            AddInclude(o => o.DeliveryMethod);
+        }
+
         public OrderWithItemsAndMethodSpecification(int id, string email) 
         : base(o => o.Id == id && o.BuyerEmail == email)
         {

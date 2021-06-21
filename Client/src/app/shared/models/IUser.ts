@@ -3,3 +3,17 @@ export interface IUser {
     userName: string;
     token: string;
 }
+
+export interface IUserForAdministration
+{
+    id: string;
+    userName: string;
+    userRoles: string[];
+    email: string;
+    emailConfirmed: boolean;
+}
+
+export class UserForUpdate {
+    roles: string[];
+    id: string;
+}

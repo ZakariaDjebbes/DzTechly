@@ -1,4 +1,4 @@
-export class ShopParams{
+export class ShopParams {
     categoryId = 0;
     typeId = 0;
     sort = 'name';
@@ -19,4 +19,9 @@ export class OrderParams {
     pageNumber = 1;
     pageSize = 5;
     sort = 'dateDesc';
+}
+
+export class UsersParams {
+    pageIndex = 1;
+    pageSize = 5;
 }

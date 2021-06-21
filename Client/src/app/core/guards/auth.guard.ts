@@ -26,8 +26,8 @@ export class AuthGuard implements CanActivate {
               if (match) {
                 return true;
               }
-
               this.toastr.error('Allowed in this area, you are not', 'Error 403');
+              this.router.navigate([''], {queryParams: {returnUrl: state.url}});
             }
             else
             {

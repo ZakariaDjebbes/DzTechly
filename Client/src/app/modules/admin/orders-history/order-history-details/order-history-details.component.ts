@@ -22,7 +22,6 @@ export class OrderHistoryDetailsComponent implements OnInit {
     this.orderService.getAdministrationOrder(+this.activatedRoot.snapshot.paramMap.get('id')).subscribe(
       (res) => {
         this.order = res;
-        console.log(this.order);
       },
       (error) => {
         console.error(error);

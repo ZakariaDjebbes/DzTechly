@@ -32,4 +32,13 @@ export class ShopItemComponent implements OnInit {
     modalRef.componentInstance.shopComponent = this.shopComponent;
     modalRef.componentInstance.product = this.product;
   }
+
+  openUpdateModal(): void {
+    const modalRef = this.modalService.open(UpdateProductModalComponent, {
+      size: 'xl',
+    });
+
+    modalRef.componentInstance.shopComponent = this.shopComponent;
+    modalRef.componentInstance.product = this.product;
+  }
 }

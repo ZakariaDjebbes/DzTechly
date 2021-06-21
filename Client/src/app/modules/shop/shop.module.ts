@@ -14,11 +14,12 @@ import { AddCategoryModalComponent } from './admin/add-category-modal/add-catego
 import { AddInfoModalComponent } from './admin/add-info-modal/add-info-modal.component';
 import { DeleteProductModalComponent } from './admin/delete-product-modal/delete-product-modal.component';
 import { UpdateProductModalComponent } from './admin/update-product-modal/update-product-modal.component';
+import { DeleteReviewModalComponent } from './admin/delete-review-modal/delete-review-modal.component';
 
 
 
 @NgModule({
-  declarations: [ShopComponent, ShopItemComponent, ProductReviewComponent, ItemDetailsComponent, AdminAddProductComponent, AddProductModalComponent, AddCategoryModalComponent, AddInfoModalComponent, DeleteProductModalComponent, UpdateProductModalComponent],
+  declarations: [ShopComponent, ShopItemComponent, ProductReviewComponent, ItemDetailsComponent, AdminAddProductComponent, AddProductModalComponent, AddCategoryModalComponent, AddInfoModalComponent, DeleteProductModalComponent, UpdateProductModalComponent, DeleteReviewModalComponent],
   imports: [
     CommonModule,
     SharedModule,
