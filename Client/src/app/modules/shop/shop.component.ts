@@ -79,7 +79,7 @@ export class ShopComponent implements OnInit {
     this.shopParams.pageNumber = 1;
     this.getProducts();
     this.shopService.getTypesOfCategory(categoryId).subscribe(
-      (res) => this.types = res,
+      (res) => this.types = [{ id: 0, name: 'All', productCategory: 'All' }, ...res],
       (err) => console.log(err)
     )
   }

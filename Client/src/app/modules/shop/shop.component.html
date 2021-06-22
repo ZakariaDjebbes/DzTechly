@@ -80,11 +80,11 @@
                 </p>
               </div>
               <div [(ngbCollapse)]="isPricingCollapsed">
-                <label for="search-input">Minimum price</label>
-                <input id="search-input" type="number" #minPrice (keyup.enter)="OnMinPrice()" (blur)="OnMinPrice()"
-                  placeholder="Minimum price" class="form-control mb-3">
                 <label for="search-input">Maximum price</label>
                 <input id="search-input" type="number" #maxPrice (keyup.enter)="OnMaxPrice()" (blur)="OnMaxPrice()"
+                  placeholder="Maximum price" class="form-control mb-3">
+                <label for="search-input">Minimum price</label>
+                <input id="search-input" type="number" #minPrice (keyup.enter)="OnMinPrice()" (blur)="OnMinPrice()"
                   placeholder="Minimum price" class="form-control mb-3">
               </div>
               <div class="text-left mb-2">
