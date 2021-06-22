@@ -64,7 +64,7 @@ namespace Infrastructure.Services
             {
                 CreateSmtpEmail result = await emailsApi.SendTransacEmailAsync(email);
             }
-            catch (EmailBlockedException ex) {}
+            catch (EmailBlockedException) {}
         }
         }
     }
