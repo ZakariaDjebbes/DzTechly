@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { IProduct, IProductInfo } from 'src/app/shared/models/IProduct';
 import { IUser } from 'src/app/shared/models/IUser';
@@ -26,7 +27,7 @@ export class ItemDetailsComponent implements OnInit {
   loading = false;
 
   constructor(private shopService: ShopService, private activatedRoot: ActivatedRoute,
-    private cartService: CartService, private modalService: NgbModal, private router: Router, private accountService: AccountService) {
+    private cartService: CartService, private modalService: NgbModal, private router: Router, private accountService: AccountService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -52,6 +53,7 @@ export class ItemDetailsComponent implements OnInit {
       (res: IProduct) => {
         this.loading = false;
         this.product = res;
+        this.toastr.success("You have been added to the waiting list of this product!");
       },
       (err) => {
         this.loading = false;

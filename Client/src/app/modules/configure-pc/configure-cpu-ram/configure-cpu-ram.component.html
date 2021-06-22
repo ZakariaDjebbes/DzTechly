@@ -1,0 +1,60 @@
+<div class="pt-5">
+    <div class="row">
+        <div class="col-6">
+            <h4 class="text-primary">Choose your Processor (CPU): </h4>
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
+                    <ul class="list-group">
+                        <li (click)="chooseCpu(item)" class="list-group-item hover" *ngFor="let item of cpus"
+                            [ngClass]="parent.selectedCpu && parent.selectedCpu.id === item.id ? 'selected' : ''">
+                            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                <div class="media-body order-2 order-lg-1">
+                                    <h5 class="mt-0 font-weight-bold mb-2">{{item.name}}</h5>
+                                    <div class="d-flex align-items-center justify-content-between mt-1">
+                                        <h6 class="font-weight-bold my-2">{{item.price|currency}}</h6>
+                                        <ngb-rating [rate]="item.reviewsAverage" [max]="5" [readonly]="true"
+                                            style="color: #5E72E4;font-size: 15px;">
+                                        </ngb-rating>
+                                    </div>
+                                </div><img src="{{item.pictureUrl}}" alt="{{item.name}}" width="200"
+                                    class="ml-lg-5 order-1 order-lg-2">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <h4 class="text-primary">Choose your Memory (RAM): </h4>
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
+                    <ul class="list-group">
+                        <li (click)="chooseRam(item)" class="list-group-item hover" *ngFor="let item of rams"
+                            [ngClass]="parent.selectedRam && parent.selectedRam.id === item.id ? 'selected' : ''">
+                            <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                                <div class="media-body order-2 order-lg-1">
+                                    <h5 class="mt-0 font-weight-bold mb-2">{{item.name}}</h5>
+                                    <div class="d-flex align-items-center justify-content-between mt-1">
+                                        <h6 class="font-weight-bold my-2">{{item.price|currency}}</h6>
+                                        <ngb-rating [rate]="item.reviewsAverage" [max]="5" [readonly]="true"
+                                            style="color: #5E72E4;font-size: 15px;">
+                                        </ngb-rating>
+                                    </div>
+                                </div><img src="{{item.pictureUrl}}" alt="{{item.name}}" width="200"
+                                    class="ml-lg-5 order-1 order-lg-2">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="mt-5 float-none d-flex justify-content-between flex-column flex-lg-row mb-2">
+        <button class="btn btn-outline-danger mb-3 mb-lg-0" cdkStepperPrevious>
+            <i class="fa fa-angle-left"></i> Back to Motherboard
+        </button>
+        <button class="btn btn-primary" [disabled]="!parent.isValid[1]" cdkStepperNext>
+            Choose GPU & HDD <i class="fa fa-angle-right"></i>
+        </button>
+    </div>

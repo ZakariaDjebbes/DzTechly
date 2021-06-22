@@ -34,7 +34,7 @@ export class ShopComponent implements OnInit {
     { name: 'Price: Heigh to Low', value: 'priceDesc' }
   ];
 
-  pageSizes = [ 6, 15, 25, 50];
+  pageSizes = [6, 15, 25, 50];
 
   constructor(private shopService: ShopService) { }
 
@@ -78,6 +78,10 @@ export class ShopComponent implements OnInit {
     this.shopParams.categoryId = categoryId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
+    this.shopService.getTypesOfCategory(categoryId).subscribe(
+      (res) => this.types = res,
+      (err) => console.log(err)
+    )
   }
 
   public OnTypeSelected(typeId: number): void {

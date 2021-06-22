@@ -1,0 +1,129 @@
+<div class="pt-5">
+    <h4 class="text-primary">Review and add to your cart: </h4>
+
+    <h5 class="text-primary">Motherboard: </h5>
+    <ng-container *ngIf="parent.selectedMotherboard">
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{parent.selectedMotherboard.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{parent.selectedMotherboard.description}}</p>
+                <button class="mt-2 btn btn-outline-primary" (click)="parent.addItemToCart(parent.selectedMotherboard)">Add
+                    to your cart now! <i class="fa fa-plus"></i></button>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">{{parent.selectedMotherboard.price|currency}}</h6>
+                    <ngb-rating [rate]="parent.selectedMotherboard.reviewsAverage" [max]="5" [readonly]="true"
+                        style="color: #5E72E4;font-size: 15px;">
+                    </ngb-rating>
+                </div>
+            </div><img src="{{parent.selectedMotherboard.pictureUrl}}" alt="{{parent.selectedMotherboard.name}}"
+                width="200" class="ml-lg-5 order-1 order-lg-2">
+        </div>
+    </ng-container>
+
+    <h5 class="text-primary">Processor (CPU): </h5>
+    <ng-container *ngIf="parent.selectedCpu">
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{parent.selectedCpu.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{parent.selectedCpu.description}}</p>
+                <button class="mt-2 btn btn-outline-primary" (click)="parent.addItemToCart(parent.selectedCpu)">Add
+                    to your cart now! <i class="fa fa-plus"></i></button>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">{{parent.selectedCpu.price|currency}}</h6>
+                    <ngb-rating [rate]="parent.selectedCpu.reviewsAverage" [max]="5" [readonly]="true"
+                        style="color: #5E72E4;font-size: 15px;">
+                    </ngb-rating>
+                </div>
+            </div><img src="{{parent.selectedCpu.pictureUrl}}" alt="{{parent.selectedCpu.name}}" width="200"
+                class="ml-lg-5 order-1 order-lg-2">
+        </div>
+    </ng-container>
+
+    <h5 class="text-primary">Memory (Ram): </h5>
+    <ng-container *ngIf="parent.selectedRam">
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{parent.selectedRam.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{parent.selectedRam.description}}</p>
+                <button class="mt-2 btn btn-outline-primary" (click)="parent.addItemToCart(parent.selectedRam)">Add
+                    to your cart now! <i class="fa fa-plus"></i></button>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">{{parent.selectedRam.price|currency}}</h6>
+                    <ngb-rating [rate]="parent.selectedRam.reviewsAverage" [max]="5" [readonly]="true"
+                        style="color: #5E72E4;font-size: 15px;">
+                    </ngb-rating>
+                </div>
+            </div><img src="{{parent.selectedRam.pictureUrl}}" alt="{{parent.selectedRam.name}}" width="200"
+                class="ml-lg-5 order-1 order-lg-2">
+        </div>
+    </ng-container>
+
+    <h5 class="text-primary">Graphics Card (Gpu): </h5>
+    <ng-container *ngIf="parent.selectedGpu">
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{parent.selectedGpu.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{parent.selectedGpu.description}}</p>
+                <button class="mt-2 btn btn-outline-primary" (click)="parent.addItemToCart(parent.selectedGpu)">Add
+                    to your cart now! <i class="fa fa-plus"></i></button>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">{{parent.selectedGpu.price|currency}}</h6>
+                    <ngb-rating [rate]="parent.selectedGpu.reviewsAverage" [max]="5" [readonly]="true"
+                        style="color: #5E72E4;font-size: 15px;">
+                    </ngb-rating>
+                </div>
+            </div><img src="{{parent.selectedGpu.pictureUrl}}" alt="{{parent.selectedGpu.name}}" width="200"
+                class="ml-lg-5 order-1 order-lg-2">
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!parent.selectedGpu">
+        <h6>No Gpu selected</h6>
+    </ng-container>
+
+    <h5 class="text-primary">Hard Drive (Hdd): </h5>
+    <ng-container *ngIf="parent.selectedHdd">
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{parent.selectedHdd.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{parent.selectedHdd.description}}</p>
+                <button class="mt-2 btn btn-outline-primary" (click)="parent.addItemToCart(parent.selectedHdd)">Add
+                    to your cart now! <i class="fa fa-plus"></i></button>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">{{parent.selectedHdd.price|currency}}</h6>
+                    <ngb-rating [rate]="parent.selectedHdd.reviewsAverage" [max]="5" [readonly]="true"
+                        style="color: #5E72E4;font-size: 15px;">
+                    </ngb-rating>
+                </div>
+            </div><img src="{{parent.selectedHdd.pictureUrl}}" alt="{{parent.selectedHdd.name}}" width="200"
+                class="ml-lg-5 order-1 order-lg-2">
+        </div>
+    </ng-container>
+
+    <h5 class="text-primary">Alimentation : </h5>
+    <ng-container *ngIf="parent.selectedPowerSupply">
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">{{parent.selectedPowerSupply.name}}</h5>
+                <p class="font-italic text-muted mb-0 small">{{parent.selectedPowerSupply.description}}</p>
+                <button class="mt-2 btn btn-outline-primary" (click)="parent.addItemToCart(parent.selectedPowerSupply)">Add
+                    to your cart now! <i class="fa fa-plus"></i></button>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">{{parent.selectedPowerSupply.price|currency}}</h6>
+                    <ngb-rating [rate]="parent.selectedPowerSupply.reviewsAverage" [max]="5" [readonly]="true"
+                        style="color: #5E72E4;font-size: 15px;">
+                    </ngb-rating>
+                </div>
+            </div><img src="{{parent.selectedPowerSupply.pictureUrl}}" alt="{{parent.selectedPowerSupply.name}}"
+                width="200" class="ml-lg-5 order-1 order-lg-2">
+        </div>
+    </ng-container>
+
+    <div class="mt-5 float-none d-flex justify-content-between flex-column flex-lg-row mb-2">
+        <button class="btn btn-outline-danger mb-3 mb-lg-0" cdkStepperPrevious>
+            <i class="fa fa-angle-left"></i> Back to Alimentation
+        </button>
+        <button class="btn btn-primary" routerLink="/cart">
+            Go To Your Cart <i class="ni ni-cart"></i>
+        </button>
+    </div>
+</div>

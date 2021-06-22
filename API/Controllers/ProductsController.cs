@@ -26,10 +26,13 @@ namespace Infrastructure.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
         private readonly IReviewService _reviewService;
+        private readonly IEmailSenderService _emailSender;
 
         public ProductsController(IUnitOfWork unitOfWork,
-            IMapper mapper, UserManager<AppUser> userManager, IReviewService reviewService)
+            IMapper mapper, UserManager<AppUser> userManager, IReviewService reviewService,
+            IEmailSenderService emailSender)
         {
+            _emailSender = emailSender;
             _reviewService = reviewService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -125,7 +128,6 @@ namespace Infrastructure.Controllers
         [Authorize(Policy = "RequireAdministration")]
         public async Task<ActionResult<ProductToReturnDto>> UpdateProduct(productToUpdateDto productDto)
         {
-            //NO TIME TO USE AUTO MAPPER F DEADLINE SORRY
             var productTypes = await _unitOfWork.Repository<ProductType>().GetListAllAsync();
             var productTypeId = productTypes.Where(x => x.Name == productDto.ProductType).Select(x => x.Id).FirstOrDefault();
 
@@ -169,9 +171,15 @@ namespace Infrastructure.Controllers
             _unitOfWork.Repository<Product>().Update(product);
             await _unitOfWork.Complete();
 
-            var spec = new ProductWithInformationsAllSpecification(product.Id);
-            var res = await _unitOfWork.Repository<Product>().GetEntityWithSpecAsync(spec);
-            return _mapper.Map<Product, ProductToReturnDto>(res);
+            var spec = new ProductWithInformationsAllSpecification(productDto.Id);
+            var original = await _unitOfWork.Repository<Product>().GetEntityWithSpecAsync(spec);
+
+            foreach (var user in original.WaitingList)
+            {
+                await _emailSender.SendProductQuantityEmailAsync(user.Email, user.UserName, original);
+            }
+
+            return _mapper.Map<Product, ProductToReturnDto>(original);
         }
 
         [HttpPost]
@@ -279,7 +287,7 @@ namespace Infrastructure.Controllers
 
         [Authorize(Policy = "RequireAdministration")]
         [HttpDelete("review")]
-        public async Task<ActionResult> DeleteReview([Required] [FromQuery] int id)
+        public async Task<ActionResult> DeleteReview([Required][FromQuery] int id)
         {
             var review = await _unitOfWork.Repository<Review>().GetByIdAsync(id);
             _unitOfWork.Repository<Review>().Delete(review);

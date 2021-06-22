@@ -119,6 +119,17 @@ export class CartService {
     );
   }
 
+  public addItemToCartWithNoChecks(item: IProduct) {
+    if (item.isInStock) {
+      const cart = this.getCurrentCartValue() ?? this.createCart();
+      const itemToAdd: ICartItem = this.mapProductToCartITem(item, 1);
+      cart.items = this.addOrUpdateItem(cart.items, itemToAdd, 1);
+      return this.setCart(cart);
+    }
+    else
+      this.toastr.error("This product is no longer in stock.", "Not in stock!");
+  }
+
   public incrementItemQuantity(item: ICartItem): void {
     this.shopService.getProduct(item.id).subscribe(
       (res) => {

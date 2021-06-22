@@ -17,6 +17,9 @@
         <div class="col px-0">
           <div class="row">
             <div class="col-lg-8">
+              <div class="icon icon-shape icon-shape-white rounded-circle mb-4">
+                <i class="ni ni-shop"></i>
+              </div>
               <h1 class="display-3  text-white">Welcome to the shop!</h1>
             </div>
           </div>
@@ -65,13 +68,14 @@
                   </option>
                 </select>
                 <div class="custom-control custom-checkbox mb-3">
-                  <input #inStock (change)="OnInStock()" class="custom-control-input"id="in-stock-check" type="checkbox">
+                  <input #inStock (change)="OnInStock()" class="custom-control-input" id="in-stock-check"
+                    type="checkbox">
                   <label class="custom-control-label" for="in-stock-check"> <span>Products in stock only</span> </label>
                 </div>
               </div>
               <div class="text-left mb-2">
                 <p class="filter-toggle text-default" (click)="isPricingCollapsed = !isPricingCollapsed"
-                  [attr.aria-expanded]="!isPricingCollapsed" aria-controls="collapseBasic">Filter by Price
+                  [attr.aria-expanded]="!isPricingCollapsed" aria-controls="collapseBasic">Pricing
                   <i class="fa" [ngClass]="isPricingCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
                 </p>
               </div>
@@ -85,33 +89,30 @@
               </div>
               <div class="text-left mb-2">
                 <p class="filter-toggle text-default" (click)="isCategoriesCollapsed = !isCategoriesCollapsed"
-                  [attr.aria-expanded]="!isCategoriesCollapsed" aria-controls="collapseBasic">Filter by Categories
+                  [attr.aria-expanded]="!isCategoriesCollapsed" aria-controls="collapseBasic">Categories & Types
                   <i class="fa" [ngClass]="isCategoriesCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
                 </p>
               </div>
               <div [(ngbCollapse)]="isCategoriesCollapsed">
-                <ul class="list-group mb-3">
-                  <li class="list-group-item" *ngFor="let category of categories"
-                    [class.active]="category.id === this.shopParams.categoryId" [value]="category.id"
-                    (click)="OnCategorySelected(category.id)">
-                    {{category.name}}</li>
-                </ul>
+                <div class="form-group">
+                  <label for="category-select">Category</label>
+                  <select id="category-select" class="custom-select mb-3"
+                    (change)="OnCategorySelected($event.target.value)">
+                    <option *ngFor="let category of categories" [value]="category.id">
+                      {{category.name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="type-select">Type</label>
+                  <select id="type-select" class="custom-select mb-3" (change)="OnTypeSelected($event.target.value)">
+                    <option *ngFor="let type of types" [value]="type.id">
+                      {{type.name}}
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div class="text-left mb-2">
-                <p class="filter-toggle text-default" (click)="isTypesCollapsed = !isTypesCollapsed"
-                  [attr.aria-expanded]="!isTypesCollapsed" aria-controls="collapseBasic">Filter by Types
-                  <i class="fa" [ngClass]="isTypesCollapsed ? 'fa-angle-up' : 'fa-angle-down'"></i>
-                </p>
-              </div>
-              <div [(ngbCollapse)]="isTypesCollapsed">
-                <ul class="list-group my-3">
-                  <li class="list-group-item" *ngFor="let type of types"
-                    [class.active]="type.id === this.shopParams.typeId" [value]="type.id"
-                    (click)="OnTypeSelected(type.id)">
-                    {{type.name}}
-                  </li>
-                </ul>
-              </div>
+
             </ng-container>
           </div>
         </div>

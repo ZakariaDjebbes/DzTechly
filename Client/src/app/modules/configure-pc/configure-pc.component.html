@@ -35,8 +35,32 @@
         <!-- 1st Hero Variation -->
     </div>
     <section class="section section-lg pt-lg-0 mt--200">
-        <div class="p-3">
-
+        <div class="container">
+            <div class="card shadow p-5">
+                <small><em>All products selected here are 100% <span class="text-info">compatible</span> with each
+                        others!</em></small>
+                <div class="row">
+                    <div class="col-12">
+                        <app-stepper #appStepper>
+                            <cdk-step [editable]="true" [label]="'Motherboard'" [completed]="isValid[0]">
+                                <app-configure-motherboard [parent]="this"></app-configure-motherboard>
+                            </cdk-step>
+                            <cdk-step [editable]="true" [label]="'CPU & RAM'"  [completed]="isValid[1]">
+                                <app-configure-cpu-ram [parent]="this"></app-configure-cpu-ram>
+                            </cdk-step>
+                            <cdk-step [editable]="true" [label]="'GPU & HDD'">
+                                <app-configure-gpu-hdd [parent]="this"></app-configure-gpu-hdd>
+                            </cdk-step>
+                            <cdk-step [label]="'Alimentation'">
+                                <app-configure-alimentation [parent]="this"></app-configure-alimentation>
+                            </cdk-step>
+                            <cdk-step [label]="'Review'">
+                                <app-configure-review [parent]="this"></app-configure-review>
+                            </cdk-step>
+                        </app-stepper>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </main>
