@@ -47,10 +47,11 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
   
 * A Swagger setup
   
-# What is missing
+# What is missing and known issues
 
 * A proper upload of images, currently, only the images existing in the server can be used. This was a requirement of the project at first.
 * Bug fixes for Add & Update products, specifically the technical sheets.
+* Bug fixes for the waiting list, where sometimes, the users wouldn't be removed even after receiving a product refill email.
 * Add OAuth2?
 
 # How to run it
