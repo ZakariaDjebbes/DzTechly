@@ -16,13 +16,14 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
 
 * Shop 
   * Most common filters (Price, name, type...) and sorting
-  * Paging (Done one the server side, not the client side)
+  * Paging
   * Product details & technical sheets
   * Basic reviews
   * Waiting list with mailing in case of a refill
   
-* Cart 
-  * Persistant
+* Shopping Cart 
+  * With order totals
+  * Shipping prices
 
 * Orders
   * Ordering & payment using Stripe
@@ -32,14 +33,17 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
   * Update login and password
   * Update personal informations & address
  
-* Administration _(This part is a bit scuffed with some bugs as i didn't have as much time to work on it, you should be able to get away with an older commit before the addition of it)_
+* Administration _(Some bugs here and there)_
   * Remove products
   * Add & Update products _**(Most bugged part)**_
   * A full orders history of the shop
   * Change other users roles or delete their accounts
   * Remove a review
   
-* Create a custom computer _(This one is very much work in progress so you can ignore it or remove it)_
+# What is missing
+
+* A proper upload of images, currently, only the images existing in the server can be used. This was a requirement of the project at first.
+* Bug fixes for Add & Update products, specifically the technical sheets.
 
 # How to run it
 I will do my best to describe the steps to run it locally, however it is quite complicated since a lot of third parties were used.
@@ -95,4 +99,3 @@ I will do my best to describe the steps to run it locally, however it is quite c
 * You will also need to setup SSL certificats, as it runs on HTTPS, this should be easy.
 * Try it out, you can find all seeded accounts in the Infrastructure project under users.json, all passwords are passw0rd (With a 0).
 # Screenshots
-Later?
