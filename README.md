@@ -45,6 +45,8 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
   
 * Error handling both on the API and the Client
   
+* A Swagger setup
+  
 # What is missing
 
 * A proper upload of images, currently, only the images existing in the server can be used. This was a requirement of the project at first.
