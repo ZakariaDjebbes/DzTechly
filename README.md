@@ -121,3 +121,5 @@ I will do my best to describe the steps to run it locally, however it is quite c
 ![Orders History](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/OrdersHistory.png)
 * Order History Detail
 ![Order History Details](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Order-History-Details.png)
+* Swagger
+![Swagger](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Swagger.png)
