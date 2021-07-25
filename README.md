@@ -67,7 +67,7 @@ I will do my best to describe the steps to run it locally, however it is quite c
         "ProductQuantityTemplateId": 5 this is the sendinblue templateId of the product refill email
         }
       
-      You have to setup those by your self.
+      You have to setup those by your self as i'm unwilling to give my own email address and too lazy to make a new one.
     ```
   * Create a stripe configuration, for that you will need a stripe account & a project, you will also need the Stripe CLI
     ```
