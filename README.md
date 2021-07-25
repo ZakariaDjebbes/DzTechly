@@ -41,7 +41,7 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
   * Change other users roles or delete their accounts
   * Remove a review
 
-* Loading indicators
+* Loading indicators and Toasts 
   
 # What is missing
 
