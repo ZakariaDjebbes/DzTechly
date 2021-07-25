@@ -43,6 +43,8 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
 
 * Loading indicators and Toasts 
   
+* Error handling both on the API and the Client
+  
 # What is missing
 
 * A proper upload of images, currently, only the images existing in the server can be used. This was a requirement of the project at first.
