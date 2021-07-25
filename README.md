@@ -8,6 +8,7 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
 * [Sendinblue](https://www.sendinblue.com/) used for transaction mails (Email address confirmation, Reset password...)
 * [Argon Design System](https://demos.creative-tim.com/argon-design-system-angular/#/home) for the UI.
 * [Redis](https://redis.io/) for carts.
+* [Swagger](https://swagger.io/) for a simple API documentation.
 
 # Features
 * Login & Register 
