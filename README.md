@@ -86,7 +86,7 @@ I will do my best to describe the steps to run it locally, however it is quite c
         "ExpiryInMinutes": 150 (Minutes before expiry of the token, is a number)
       }
     ```
-    * Connection strings, by default the API uses an SQLite database
+    * Connection strings, by default the API uses an SQLite database, make sure you have a Redis server running on localhost. The Database should be generated once you run the project, note that there should be no need to run migrations manually as the API runs them before starting the api.
     ```
         "ConnectionStrings": {
         "DefaultConnection": "Data source=dztechly.db",
