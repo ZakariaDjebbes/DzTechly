@@ -62,9 +62,9 @@ I will do my best to describe the steps to run it locally, however it is quite c
         "ApiKey": "The api key of your account",
         "FromEmail": "the email you wish to send emails from",
         "FromName": "the name of the sender, DZTechly !",
-        "ConfirmEmailTemplateId": 1 this is the sendinblue templateId of the confirmation email,
-        "PasswordChangeTemplateId": 2 this is the sendinblue templateId of the password change email,
-        "ProductQuantityTemplateId": 5 this is the sendinblue templateId of the product refill email
+        "ConfirmEmailTemplateId": 1, (this is the sendinblue templateId of the confirmation email)
+        "PasswordChangeTemplateId": 2, (this is the sendinblue templateId of the password change email)
+        "ProductQuantityTemplateId": 5 (this is the sendinblue templateId of the product refill email)
         }
       
       You have to setup those by your self as i'm unwilling to give my own email address and too lazy to make a new one.
@@ -83,7 +83,7 @@ I will do my best to describe the steps to run it locally, however it is quite c
     "Token": {
         "Key": "a string key that is used to create tokens, it should be BIG for security but it can be whatever you want!",
         "Issuer": "https://localhost:5001 or the address at which you serve the API",
-        "ExpiryInMinutes": 150 Minutes before expiry of the token
+        "ExpiryInMinutes": 150 (Minutes before expiry of the token, is a number)
       }
     ```
     * Connection strings, by default the API uses an SQLite database
@@ -95,7 +95,7 @@ I will do my best to describe the steps to run it locally, however it is quite c
     ```
     * Cart life span
     ```
-        "CartLifeSpanInMinutes": 420,
+        "CartLifeSpanInMinutes": 420, (how much should the cart be kept alive in minutes?)
     ```
 * Run the API, you should be able to use the API.bat batch file, you can however run it with the .NET CLI if you wish, this will create an SQL database and fill it with seed data
 * Go the client folder and run `npm install`, then you should be able to run the client using either client.bat or the angular CLI
