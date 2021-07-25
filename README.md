@@ -103,3 +103,21 @@ I will do my best to describe the steps to run it locally, however it is quite c
 * You will also need to setup SSL certificats, as it runs on HTTPS, this should be easy.
 * Try it out, you can find all seeded accounts in the Infrastructure project under users.json, all passwords are passw0rd (With a 0).
 # Screenshots
+* Login
+![Login Image](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Login.png)
+* Confirm Email
+![Confirm Email](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Confirm%20Mail.png)
+* Reset Password
+![Reset Password](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Reset%20Password.png)
+* Shop
+![Shop](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Shop.png)
+* Product
+![Product](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Product.png)
+* Technical Sheet
+![TS](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/TechnicalSheet.png)
+* Order
+![Order](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Order.png)
+* Orders History (Admin)
+![Orders History](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/OrdersHistory.png)
+* Order History Detail
+![Order History Details](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Order-History-Details.png)
