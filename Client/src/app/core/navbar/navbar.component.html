@@ -29,9 +29,6 @@
                     <i class="ni ni-bullet-list-67"></i> Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" [routerLink]="['/configure']"><i class="ni ni-settings"></i> Configure your pc</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#" [routerLink]="['/cart']">
                     <span class="badge badge-warning cart-count"
                         *ngIf="(cart$ | async) as cart">{{cart.items.length}}</span>

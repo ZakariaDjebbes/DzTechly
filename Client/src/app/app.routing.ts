@@ -11,7 +11,6 @@ const routes: Routes = [
   {path: 'server-error', component: ServerErrorComponent},
   {path: 'not-found', component: NotFoundComponent},
   { path: 'shop', loadChildren: () => import('./modules/shop/shop.module').then(mod => mod.ShopModule) },
-  { path: 'configure', loadChildren: () => import('./modules/configure-pc/configure-pc.module').then(mod => mod.ConfigurePcModule) },
   { path: 'account', loadChildren: () => import('./modules/account/account.module').then(mod => mod.AccountModule)},
   { path: 'cart', loadChildren: () => import('./modules/cart/cart.module').then(mod => mod.CartModule) },
   {path: 'orders', loadChildren: () => import('./modules/orders/orders.module').then(mod => mod.OrdersModule), canActivate: [AuthGuard]},
