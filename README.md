@@ -40,11 +40,14 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
   * A full orders history of the shop
   * Change other users roles or delete their accounts
   * Remove a review
+
+* Loading indicators
   
 # What is missing
 
 * A proper upload of images, currently, only the images existing in the server can be used. This was a requirement of the project at first.
 * Bug fixes for Add & Update products, specifically the technical sheets.
+* Add OAuth2?
 
 # How to run it
 I will do my best to describe the steps to run it locally, however it is quite complicated since a lot of third parties were used.
