@@ -43,10 +43,15 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
 
 * Loading indicators and Toasts 
   
-# What is missing
+* Error handling both on the API and the Client
+  
+* A Swagger setup
+  
+# What is missing and known issues
 
 * A proper upload of images, currently, only the images existing in the server can be used. This was a requirement of the project at first.
 * Bug fixes for Add & Update products, specifically the technical sheets.
+* Bug fixes for the waiting list, where sometimes, the users wouldn't be removed even after receiving a product refill email.
 * Add OAuth2?
 
 # How to run it
@@ -62,12 +67,12 @@ I will do my best to describe the steps to run it locally, however it is quite c
         "ApiKey": "The api key of your account",
         "FromEmail": "the email you wish to send emails from",
         "FromName": "the name of the sender, DZTechly !",
-        "ConfirmEmailTemplateId": 1 this is the sendinblue templateId of the confirmation email,
-        "PasswordChangeTemplateId": 2 this is the sendinblue templateId of the password change email,
-        "ProductQuantityTemplateId": 5 this is the sendinblue templateId of the product refill email
+        "ConfirmEmailTemplateId": 1, (this is the sendinblue templateId of the confirmation email)
+        "PasswordChangeTemplateId": 2, (this is the sendinblue templateId of the password change email)
+        "ProductQuantityTemplateId": 5 (this is the sendinblue templateId of the product refill email)
         }
       
-      You have to setup those by your self.
+      You have to setup those by your self as i'm unwilling to give my own email address and too lazy to make a new one.
     ```
   * Create a stripe configuration, for that you will need a stripe account & a project, you will also need the Stripe CLI
     ```
@@ -83,10 +88,10 @@ I will do my best to describe the steps to run it locally, however it is quite c
     "Token": {
         "Key": "a string key that is used to create tokens, it should be BIG for security but it can be whatever you want!",
         "Issuer": "https://localhost:5001 or the address at which you serve the API",
-        "ExpiryInMinutes": 150 Minutes before expiry of the token
+        "ExpiryInMinutes": 150 (Minutes before expiry of the token, is a number)
       }
     ```
-    * Connection strings, by default the API uses an SQLite database
+    * Connection strings, by default the API uses an SQLite database, make sure you have a Redis server running on localhost. The Database should be generated once you run the project, note that there should be no need to run migrations manually as the API runs them before starting the api.
     ```
         "ConnectionStrings": {
         "DefaultConnection": "Data source=dztechly.db",
@@ -95,7 +100,7 @@ I will do my best to describe the steps to run it locally, however it is quite c
     ```
     * Cart life span
     ```
-        "CartLifeSpanInMinutes": 420,
+        "CartLifeSpanInMinutes": 420, (how much should the cart be kept alive in minutes?)
     ```
 * Run the API, you should be able to use the API.bat batch file, you can however run it with the .NET CLI if you wish, this will create an SQL database and fill it with seed data
 * Go the client folder and run `npm install`, then you should be able to run the client using either client.bat or the angular CLI
@@ -121,3 +126,5 @@ I will do my best to describe the steps to run it locally, however it is quite c
 ![Orders History](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/OrdersHistory.png)
 * Order History Detail
 ![Order History Details](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Order-History-Details.png)
+* Swagger
+![Swagger](https://github.com/ZakariaDjebbes/DzTechly/blob/master/Screenshots/Swagger.png)
