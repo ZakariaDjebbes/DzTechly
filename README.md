@@ -34,9 +34,9 @@ An e-commerce web application for a fictionnal "DZTechly" commerce that sells Te
   * Update login and password
   * Update personal informations & address
  
-* Administration _(Some bugs here and there)_
+* Administration 
   * Remove products
-  * Add & Update products _**(Most bugged part)**_
+  * Add & Update products 
   * A full orders history of the shop
   * Change other users roles or delete their accounts
   * Remove a review
